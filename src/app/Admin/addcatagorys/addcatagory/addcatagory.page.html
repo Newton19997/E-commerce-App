@@ -1,0 +1,154 @@
+<ion-header  [translucent]="true">
+<ion-toolbar color="secondary">
+  <ion-title class="logo">
+    <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button (click)="this.api.Resetpassword()" routerLink="/adlogin">L-out</ion-button>    
+  </ion-buttons>
+</ion-toolbar>
+</ion-header> 
+
+<ion-content>
+  <form #userForm="ngForm">
+    <!-- {{userForm.value | json}} -->
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button routerLink="/admin" ><ion-icon name="arrow-back"></ion-icon></ion-button>Add Catagory
+        </ion-buttons>
+        
+      </div>
+      <div class="card-body">
+
+
+        <!-- <select (blur)="validatecompany(companys.value)" (change)="validatecompany(companys.value)" required #companys="ngModel"
+        [class.is-invalid]="companyError && companys.touched"  class="custom-select form-control-sm" name='companys' placeholder="Select Company" [(ngModel)]=prod.CampanyID>
+   
+        <option *ngFor="let com of prods" [value]="com.CampanyID">{{com.CmopanyName}}</option>
+        </select> <br/> 
+       <small class="text-danger" [class.d-none]="!companyError || companys.untouched">Please choose Company!</small><br/> -->
+
+       <select   required #companys="ngModel"
+       [class.is-invalid]="companyError && companys.touched" disabled="true" class="custom-select form-control-sm" name='companys'  [(ngModel)]=prod.CampanyID>
+    <!-- <option [value]="0">Select Company</option> -->
+       <option *ngFor="let com of prods" [value]="com.CampanyID">{{com.CmopanyName}}</option>
+       </select> <br/> <!--[options]="prods"  labelField="companyname" valueField="companyid"  -->
+      <small class="text-danger" [class.d-none]="!companyError || companys.untouched">Please choose Company!</small><br/>
+
+
+        <!-- <select (blur)="validateTopic(companys.value)" (change)="validateTopic(companys.value)"  #companys="ngModel"
+         [class.is-invalid]="topicError && companys.touched"   class="form-control form-control-sm" name='companys' [(ngModel)]="prod.CampanyID">
+          <option value="default">Select My Company</option>
+          <option *ngFor="let com of company">{{com}}</option>
+        </select> 
+        <small class="text-danger" [class.d-none]="!topicError || companys.untouched">Please choose Company!</small><br/> -->
+
+
+        <!-- <label>Catagory Name</label> -->
+        <input type="text" class="form-control  form-control-sm" required #catagory="ngModel"
+         [class.is-invalid]="catagory.invalid && catagory.touched" id="catagoryID" name="catagoryName" [(ngModel)]="prod.cname" id="formGroupExampleInput" placeholder="Enter input Catagory Name"> 
+        <small class="text-danger" [class.d-none]="catagory.valid || catagory.untouched">Catagory Name is required !</small><br/>
+
+        <label>Catagory Image</label>  
+        <ion-card>
+
+
+        <!-- <img *ngIf="!prod.Cimage" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image.click()">
+        <img *ngIf="!prod.Cimage && this.editId" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image.click()" >
+      
+        <img *ngIf="prod.Cimage" src="{{api.baseUrl + this.prod?.Cimage }}" style="width: 130px;height: 90px;" alt="" (click)="image.click()">
+        <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewton($event.target.files);uploadFilenewton1($event.target.files)" #image name="image" placeholder="image" />
+ -->
+
+        <img *ngIf="!prod.Cimage && !collapse" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image.click()">
+        <img *ngIf="!prod.Cimage && this.editId" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image.click()" >
+       <img *ngIf="collapse" [src]="imageUrl" style="width: 130px;height: 90px;" alt="" (click)="image.click()">
+        <img *ngIf="prod.Cimage && !collapse" src="{{api.baseUrl + this.prod?.Cimage }}" style="width: 130px;height: 90px;" alt="" (click)="image.click()">
+        <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewton($event.target.files);uploadFilenewton1($event.target.files)" #image name="image" placeholder="image" />
+
+
+ <!-- this working  *ngIf="prod.Cimage"src="{{ api.baseUrl + this.prod?.Cimage }}" -->
+
+        <!-- <img  alt="" style="width: 130px;height: 90px;" (click)="image.click()">
+        <input type="file" hidden style="padding: 5px" accept="image/*" (change)="handleFileInput($event.target.files)" #image name="image" placeholder="image" /> -->
+ <!-- this working end -->
+
+        <!-- <img src="../../../../assets/images/9.jpg" class="ui image" alt="" (click)="image.click()">
+        <input type="file" hidden style="padding: 5px" #Image  accept="image/*" (change)="handleFileInput($event.target.files)" #image name="image" placeholder="image" /> -->
+        </ion-card> 
+
+        <!-- <ion-card>
+          <img *ngIf="!fileUrl" src="assets/no-image.jpeg"/>
+          <img *ngIf="fileUrl" src="{{fileUrl}}"/>
+          <ion-card-content>
+            <ion-button color="medium" size="large" (click)="cropUpload()">
+              <ion-icon slot="icon-only" name="camera"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card> -->
+
+        
+        <!-- <button  [disabled]="userForm.form.invalid || image.value==''" (click)="patch(userForm)" type="submit" class="btn btn-primary btn-sm">Submit</button> -->
+
+        <ion-grid> 
+          <ion-row>
+            <ion-col sizeLg="2" sizeMd="2" sizeXs="2" >
+              <button *ngIf="!editId" [disabled]="userForm.form.invalid || image.value==''" (click)="patch()" type="submit" class="btn btn-primary btn-sm fon">Save</button>
+              <button *ngIf="editId" [disabled]="userForm.form.invalid" (click)="Edit()" type="submit" class="btn btn-primary btn-sm fon">Edit</button>
+            </ion-col>     &nbsp;                 
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="6" >
+              <input type="text" class="form-control form-control-sm"   placeholder="Search Item Name" name="Item" [(ngModel)]="searchcom" (ngModelChange)="SearchCompany()">  
+      
+            </ion-col>            
+            <ion-col sizeLg="2" sizeMd="2" sizeXs="2" >
+              <button *ngIf="editId" (click)="deleteItem()" type="submit" class="btn btn-primary btn-sm fon">Del</button>
+            </ion-col>
+            <ion-col sizeLg="1" sizeMd="1" sizeXs="1" >
+              <button  (click)="setpage()" type="submit" class="btn btn-primary btn-sm fon">Set</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+        <div id="no-more-tables">
+          <!-- <table class="table table-success table-striped"> -->
+            <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+            <thead>
+            <tr >           
+              <th>S.No</th>
+              <th>Action</th>
+              <th>Catagory Name</th>  
+              
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let com of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+                <td>{{i+1+(page-1) * pageSize}} </td>
+             <td> <ion-icon name="trash-outline"></ion-icon>||<ion-icon name="create-outline" fill="outline" [routerLink]="['/addcatagory/',com?.cid]" routerDirection="forward" ></ion-icon>
+              <!--  [routerLink]="['/company/',com?.companyid]" routerDirection="forward" -->
+            </td>
+             <td>{{com.cname}}</td>
+           
+            
+              </tr>
+            </tbody>
+            </table>
+            <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+   
+          </div>
+      </div>
+    </div>
+
+  </form>
+</ion-content>
+
+
+
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

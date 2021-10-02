@@ -1,0 +1,182 @@
+
+
+
+<ion-header  [translucent]="true">
+  <ion-toolbar  color="secondary">
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/login">U-out</ion-button>      
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-header> 
+
+<ion-content>
+  <form #userForm="ngForm">
+
+    <!-- {{userForm.value | json}} -->
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button routerLink="/userpayment" ><ion-icon name="arrow-back"></ion-icon></ion-button>Payment
+        </ion-buttons>        
+      </div>
+      </div>
+      <div class="card-body">
+        
+        <ion-grid>
+          <ion-row>
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+              <label type="label" *ngFor="let item of loadAmounts" for="exampleInputEmail1">User Name:-  {{item.fname}} </label><br/> 
+              <label type="label" *ngFor="let item of loadAmounts" for="exampleInputEmail1">Total Payment:-  {{item.totalprice}} TK..</label> <br/> 
+            
+            </ion-col>
+            <ion-col sizeLg="12" sizeMd="12" sizeXs="12"> 
+                            <select           
+              class="form-control form-control-sm"
+               name="my-select"  [(ngModel)]="prod.type" (change)="selectChange()" >
+                <option [value]="0" disabled selected>Select Type</option> 
+                  <option [value]="item.id" *ngFor="let item of types">
+                      {{item.listitem}}
+                  </option>
+              </select>             
+              
+              <!-- <h4>Selected Values</h4> (ngModelChange)="onChange()" -->
+              
+              <!-- <div>
+                  Selected: {{selectedValue}}
+              </div>     -->
+<!--  <select (blur)="validateunit(type.value)"   #type="ngModel"
+              [class.is-invalid]="typeError && type.touched"  placeholder="Select Type"  class="form-control form-control-sm" name='type' (ngModelChange)="typeSelected()" [(ngModel)]="prod.type">
+              <option  [value]="0" disabled selected>Select Type</option> 
+               <option *ngFor="let un of types"  [value]="un.id">{{un.listitem}}</option>
+             </select> 
+             <small class="text-danger" [class.d-none]="!typeError || type.untouched">Select Payment Type</small> -->
+
+            </ion-col>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+             <div class="row">
+              <div class="col">
+                <!-- <div class="collapse multi-collapse" id="multiCollapseExample1"> -->
+                  <div *ngIf="collapse" class="card card-body">
+
+                    <select           
+                    class="form-control form-control-sm"
+                     name="mycardType"  [(ngModel)]="prod.cardType" >
+                      <option [value]="0" disabled selected>Select Card Type</option> 
+                      <option [value]="'Credit Card'"  selected>Credit Card</option> 
+                      <option [value]="'Debit Card'"  selected>Debit Card</option>                      
+                    </select> 
+
+
+
+                    <ion-item>
+                      <ion-label>Bank</ion-label>
+                      <ionic-selectable
+                        item-content 
+                        name='bank'
+                        [(ngModel)]="prod.bank"
+                        [items]="banks"
+                        itemValueField="id"
+                        itemTextField="listitem"
+                        [canSearch]="true"
+                        (onChange)="portChange($event)">
+                        
+                      </ionic-selectable>
+                    </ion-item> <br/>
+
+                    <!-- <select (blur)="validatbank(bank.value)" (change)="validatbank(bank.value)"  #bank="ngModel"
+                    [class.is-invalid]="bankError && bank.touched"   class="form-control form-control-sm" name='bank' [(ngModel)]="prod.bank">
+                   
+                     <option [value]="0">Select bank</option>
+                     <option *ngFor="let un of banks"  [value]="un.id">{{un.listitem}}</option>
+                   </select> 
+               <small class="text-danger" [class.d-none]="!bankError || bank.untouched">Select Payment Bank</small><br/> -->
+
+
+
+        <input type="text" name='branch' [(ngModel)]=prod.branch class="form-control form-control-sm" required #branch="ngModel"
+        [class.is-invalid]="branch.invalid && branch.touched" id="branch" placeholder="Enter input branch "><br/>
+        <small class="text-danger" [class.d-none]="branch.valid || branch.untouched">branch is required !</small><br/>
+                   
+        <input type="text" name='cardno' [(ngModel)]=prod.cardno class="form-control form-control-sm" required #cardno="ngModel"
+        [class.is-invalid]="cardno.invalid && cardno.touched" id="cardno" placeholder="Enter input cardno "><br/>
+        <small class="text-danger" [class.d-none]="cardno.valid || cardno.untouched">Cardno is required !</small><br/>
+
+        <input type="text" name='cvvno' [(ngModel)]=prod.cvvno class="form-control form-control-sm" required #cvvno="ngModel"
+        [class.is-invalid]="cvvno.invalid && cvvno.touched" id="cvvno" placeholder="Enter input cvvno "><br/>
+        <small class="text-danger" [class.d-none]="cvvno.valid || cvvno.untouched">cvvno is required !</small><br/>
+
+                  </div>
+                <!-- </div> -->
+              </div>
+          
+            </div>
+          </ion-col>
+
+
+        <!-- <ion-col>
+              <ion-list>             
+        
+                <ion-radio-group allow-empty-selection value="anchovies">
+                  <ion-list-header>
+                    <ion-label>Select Payment Method</ion-label>
+                  </ion-list-header>
+                  <ion-item checked="true">
+                    <ion-label>Cash On Delivery</ion-label>
+                    <ion-radio slot="end" *ngIf="collapse"  color="primary" value="Cash"></ion-radio>
+                  </ion-item>
+        
+                  <ion-item>
+                    <ion-label>Bikash OR Nagad </ion-label>
+                    <ion-radio slot="end" color="secondary" *ngIf="collapse" (click)="serchForm()"  value="BikashORNagad"></ion-radio>
+                  </ion-item>
+        
+         
+
+                  <ion-item                 
+                  button *ngIf="collapse" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"> 
+              
+                  <span *ngIf="collapse"> <strong><i class="add icon"></i></strong> OnLine</span>
+                  <span *ngIf="!collapse"><strong><i class="arrow up icon "></i></strong> OnLine</span>
+                  
+                </ion-item> 
+                  <div class="row">
+                    <div class="col">
+                      <div class="collapse multi-collapse" id="multiCollapseExample1">
+                        <div class="card card-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                        </div>
+                      </div>
+                    </div>
+                
+                  </div>
+          
+                </ion-radio-group>          
+
+              </ion-list>
+      
+     </ion-col> -->
+     <ion-col sizeLg="12" sizeMd="12" sizeXs="12">
+     <input type="text" name='remarks' TextMode="MultiLine" [(ngModel)]=prod.remarks class="form-control form-control-sm"  #remarks="ngModel"
+     [class.is-invalid]="remarks.invalid && remarks.touched" id="remarks" placeholder="Enter input remarks "><br/>
+    </ion-col>
+
+        </ion-row>
+        <!-- <small class="text-danger" [class.d-none]="Quantity.valid || Quantity.untouched">Quantity is required !</small> -->
+        </ion-grid>
+       
+        
+        <ion-button class="ion-text-wrap min-max-width form-control-sm fon" routerLink="/category" fill="outline" size="small" routerDirection="forward" >Continue Shopping...</ion-button>&nbsp;
+        <ion-button *ngIf="loadAmounts" [disabled]="userForm.form.invalid || typeError" (click)="InsertPyment()" type="submit" class="ion-text-wrap min-max-width form-control-sm fon" >Payment</ion-button>
+    </div>
+  </form>
+</ion-content>
+<ion-footer >
+<ion-toolbar class="foterhight" color="warning">
+  <ion-title>
+    Do Shopping joyfully....
+  </ion-title>
+</ion-toolbar>
+</ion-footer>

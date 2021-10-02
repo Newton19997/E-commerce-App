@@ -1,0 +1,98 @@
+
+<ion-header  [translucent]="true">
+  <ion-toolbar  color="secondary">
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/login">U-out</ion-button>    
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-header> 
+
+<ion-content>
+  <form #userForm="ngForm">
+
+    <!-- {{userForm.value | json}} -->
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button routerLink="/home" ><ion-icon name="arrow-back"></ion-icon></ion-button>User Payment
+        </ion-buttons>        
+      </div>
+      </div>
+      <div class="card-body">
+        <div id="no-more-tables">
+          <!-- <table class="table table-success table-striped"> -->
+            <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+            <thead>
+            <tr >           
+              <th>S.No</th>
+              <th>Action</th>
+              <th hidden>oid</th>  
+              <th hidden>iid</th>  
+              <th>iname</th>  
+              <th>image</th>  
+              <th>A-Qty</th>  
+              <th>S_Qty</th>  
+              <th>Unit</th>
+              <th>price</th>  
+              <th>totalprice</th>  
+              <th hidden>productSize</th>  
+              <th hidden>productSizeID</th>  
+                 
+
+              <!--<th>Date</th>-->
+            </tr>
+            </thead>
+            <tbody>
+              <!-- <tr *ngFor="let com of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index"> -->
+              <tr *ngFor="let com of loadOrders let i = index">
+                <!-- <td>{{i+1+(page-1) * pageSize}} </td> -->
+                <td>{{i+1}} </td>
+             <td> 
+                 <!-- <ion-icon name="trash-outline"></ion-icon>|<ion-icon name="create-outline" fill="outline" [routerLink]="['/company/',com?.companyid]" routerDirection="forward" ></ion-icon>
+            {{com.companyid }} -->
+              <ion-button expand="full" (click)="orderEdit(i)" class="ion-text-wrap min-max-width form-control-sm fon">Edit</ion-button>
+              <ion-button expand="full" (click)="orderDelete(i)" class="ion-text-wrap min-max-width form-control-sm fon">Del</ion-button>
+            </td>
+             <td hidden>{{com.oid }}</td>
+             <td hidden>{{com.iid }}</td>
+             <td>{{com.iname }}</td>
+             <td>
+              <ion-thumbnail slot="start">
+              <img *ngIf="com.image" src="{{ api.baseUrl + com.image }}" style="width: 40px;height: 40px;" alt="logo" >
+            </ion-thumbnail>
+            </td>
+             <td>{{com.aquantity }}</td>
+             <td><input type="number" (keydown)="api.numberOnly($event)" class="ion-text-wrap min-max-width form-control-sm fon"  (ngModelChange)="chackQty($event,i)"
+                name="quntity{{i}}"  [(ngModel)]="com.quntity"></td>
+             <td>{{com.ListItem }}</td>
+             <td>{{com.price }}</td>
+             <td>{{com.totalprice }}</td>            
+             <td hidden>{{com.productSize }}</td>
+             <td hidden>{{com.productSizeID }}</td>
+            
+              </tr>
+            </tbody>
+            </table>
+            <ion-label *ngIf="totalPrice" slot="end">Total price: {{this.totalPrice}} BD</ion-label>
+            
+            <!-- <ngb-pagination [collectionSize]="items.length" api.numberOnly($event) [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>  -->
+   
+          </div>
+          <br/>
+          <ion-button class="ion-text-wrap min-max-width form-control-sm fon" routerLink="/category" fill="outline" size="small" routerDirection="forward" >Continue Shopping...</ion-button>&nbsp;
+          <ion-button  *ngIf="totalPrice" class="ion-text-wrap min-max-width form-control-sm fon" routerLink="/payment" routerDirection="forward"  type="submit" >Payment </ion-button>
+          <!-- class="btn btn-primary btn-xs fon" -->
+        </div>
+    </form>
+</ion-content>
+<!-- <ion-label slot="end">Total price: {{this.quantity[0]}}</ion-label> -->
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

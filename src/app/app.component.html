@@ -1,3 +1,79 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu  menuId="main-menu" content-id="main">
+    <ion-header>
+      <ion-toolbar color="secondary">
+        <ion-title>
+          Menu        
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+<ion-content>
+  <ion-list>
+    <ion-menu-toggle>
+      <ion-item  routerLink="/home">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ioc-label>Home</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item *ngIf="comID" routerLink="/category">       
+        <ion-icon name="locate-outline" slot="start"></ion-icon>
+        <ioc-label>Category</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item routerLink="/registration">
+        <ion-icon name="bonfire-outline"  slot="start"></ion-icon>      
+        <ioc-label>User Registration</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item routerLink="/login">
+        <ion-icon name="log-in-outline" slot="start"></ion-icon>     
+        <ioc-label>User Login</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item *ngIf="comID" routerLink="/feedback">      
+        <ion-icon name="woman-outline"slot="start"></ion-icon>
+        <ioc-label>Chat</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle>
+      <ion-item *ngIf="comID" routerLink="/addfeedback">
+        <ion-icon name="logo-alipay" slot="start"></ion-icon>
+                <ioc-label>PayFeedback</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle>
+      <ion-item  routerLink="/datereport"> 
+        <ion-icon name="logo-slack" slot="start"></ion-icon>        
+        <ioc-label>Buy and sales bazzar </ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item *ngIf="comID" routerLink="/userpayment"> 
+        <ion-icon name="logo-paypal" slot="start"></ion-icon>      
+        <ioc-label>Payment View</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item *ngIf="comID " routerLink="/changepassword">      
+        <ion-icon slot="start" name="aperture-outline"></ion-icon>
+        <ioc-label>Change password</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item routerLink="/contact">       
+        <ion-icon name="contract-outline" slot="start"></ion-icon>
+        <ioc-label>Contact & US</ioc-label>
+      </ion-item>  
+    </ion-menu-toggle> 
+
+  </ion-list>
+</ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

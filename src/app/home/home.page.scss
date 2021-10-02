@@ -25,3 +25,56 @@
 #container a {
   text-decoration: none;
 }
+.logo{
+  margin-left: -10px;
+  padding-left: 0px;
+}
+
+//for new design
+.line{
+  border: 1px solid #ccc;
+  padding: 0px;
+}
+.price{
+  color:red;
+  font-size: 13px;
+}
+.heart{
+  color: red;
+  font-size: 10px;
+}
+ion-fab-button{
+  height: 70px;
+  width: 70px;
+}
+.cart-icon{
+  font-size: 50px;
+}
+.cart-length{
+  color:var(--ion-color-primary);
+  position: absolute;
+  top:20px;
+  left:25px;
+  font-weight: 600;
+  font-size: 1cm;
+  min-width: 25px;
+  z-index: 10;
+}
+//for button add newton
+.fon{
+  font-size:9px;
+}
+.freeze{
+  overflow: hidden;
+  background-color: rgb(230, 215, 215);
+  position: fixed;
+  width: 100%;
+}
+.chatdata {
+  padding: 10px;
+  margin-top: 115px;
+ // height: 1500px; /* Used in this example to enable scrolling */
+}
+.fon1{
+  font-size:7px;
+}

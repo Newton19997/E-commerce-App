@@ -1,0 +1,75 @@
+#container {
+    text-align: center;
+  
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+  
+    color: #8c8c8c;
+  
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  .logo{
+    margin-left: -10px;
+    padding-left: 0px;
+  }
+  
+  //for new design
+  .line{
+    border: 1px solid #ccc;
+    padding: 0px;
+  }
+  .price{
+    color:red;
+    font-size: 13px;
+  }
+  .heart{
+    color: red;
+  }
+  ion-fab-button{
+    height: 70px;
+    width: 70px;
+  }
+  .cart-icon{
+    font-size: 50px;
+  }
+  .cart-length{
+    color:var(--ion-color-primary);
+    position: absolute;
+    top:20px;
+    left:25px;
+    font-weight: 600;
+    font-size: 1cm;
+    min-width: 25px;
+    z-index: 10;
+  }
+  .fon{
+    font-size:9px;
+  }
+  .freeze{
+    overflow: hidden;
+    background-color: rgb(230, 215, 215);
+    position: fixed;
+    width: 100%;
+  }
+  .chatdata {
+    padding: 10px;
+    margin-top: 95px;
+   // height: 1500px; /* Used in this example to enable scrolling */
+  }

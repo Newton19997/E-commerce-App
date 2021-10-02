@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { ItemviewPageModule } from '../itemviews/itemview/itemview.module';
+import { CosPageModule } from '../coss/cos/cos.module';
 
 
 @NgModule({
@@ -12,7 +14,10 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    ItemviewPageModule,
+    CosPageModule
+
   ],
   declarations: [HomePage]
 })

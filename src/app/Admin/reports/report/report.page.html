@@ -1,0 +1,255 @@
+
+
+<ion-header  [translucent]="true">
+  <ion-toolbar  color="secondary">
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/adlogin">L-out</ion-button>    
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-header> 
+
+
+  
+  <ion-content>
+    <form #userFrom="ngForm">
+  
+      <!-- {{userFrom.value | json}} -->
+      <div class="card">
+        <div class="card-header">
+          <ion-buttons slot="start">
+            <ion-button routerLink="/vieworder"><ion-icon name="arrow-back"></ion-icon></ion-button>Reports
+          </ion-buttons>        
+        </div>
+        </div>
+        <div class="card-body">
+ 
+        <!-- <ion-grid>    
+          <ion-row>
+            <ion-col size-sm="9" size="9" >
+        <input type="text" class="form-control form-control-sm"   placeholder="Search User Name" name="User" [(ngModel)]="searchUser" (ngModelChange)="SearchUserNane()">      
+      </ion-col>
+    
+      <ion-col size-sm="3" size="3" class="ion-text-center">
+        <ion-button expand="full" (click)="reset()" class="ion-text-wrap min-max-width form-control-sm fon">Reset</ion-button>
+        
+      </ion-col>
+      </ion-row>       
+    </ion-grid> -->
+  
+         
+    <div *ngIf="collapse" id="no-more-tables">
+      <input type="text" class="form-control form-control-sm" placeholder="Search mobil No" name="mobilNo" [(ngModel)]="UserNo" (ngModelChange)="searchOrder()">  
+      
+      <!-- <table class="table table-success table-striped"> -->
+        <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+        <thead>
+        <tr >           
+          <th>S.No</th>
+          <th>Action</th>
+          <th>Name</th>           
+          <th>Item</th>
+          <td>Total Qty</td>
+         
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+            <td>{{i+1+(page-1) * pageSize}} </td>
+         <td>
+          <!-- <ion-button expand="full" (click)="clear()" [routerLink]="['/forpayment/',it?.pid]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Pay</ion-button> -->
+          <ion-button *ngIf="RULid!=3 && RULid!=4 && RULid!=9 && RULid!=10" expand="full" (click)="deleteItem(i)" class="ion-text-wrap min-max-width form-control-sm fon">del</ion-button>
+        
+        </td>
+         <td>{{it.uname }}</td>
+         <td>{{it.iname }}</td>
+         <td>{{it.totalprice }}</td>        
+          </tr>
+        </tbody>
+        </table>
+        <!-- <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>  -->
+  
+      </div>
+  
+      <div *ngIf="collapses" id="no-more-tabless">
+        <input type="text" class="form-control form-control-sm" placeholder="Search ItemName" name="user" [(ngModel)]="iname" (ngModelChange)="searchItemmin()">  
+      
+        <!-- <table class="table table-success table-striped"> -->
+          <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+          <thead>
+          <tr >           
+            <th>S.No</th>
+            <!-- <th>Action</th> -->
+            <th>Iname</th>           
+            <th>Qty</th>
+            <td>price</td>
+            <td>Unit</td>
+           
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+              <td>{{i+1+(page-1) * pageSize}} </td>
+           <!-- <td> -->
+            <!-- <ion-button expand="full" (click)="clear()" [routerLink]="['/forpayment/',it?.pid]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Pay</ion-button> -->
+            <!-- <ion-button expand="full"  class="ion-text-wrap min-max-width form-control-sm fon">Show</ion-button> -->
+          
+          <!-- </td> -->
+           <td>{{it.iname }}</td>
+           <td>{{it.aquantity }}</td>
+           <td>{{it.price }}</td> 
+           <td>{{it.ListItem }}</td>         
+            </tr>
+          </tbody>
+          </table>
+          <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+    
+        </div>
+
+
+        <div *ngIf="collapsess" id="no-more-tabless">
+
+          <input type="text" class="form-control form-control-sm"   placeholder="Search Catagory" name="user" [(ngModel)]="Catagory" (ngModelChange)="searchCatagoryList()">  
+      
+          <!-- <table class="table table-success table-striped"> -->
+            <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+            <thead>
+            <tr >           
+              <th>S.No</th>
+              <!-- <th>Action</th> -->
+              <th>Catagory</th>           
+              <th>Date</th>             
+             
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+                <td>{{i+1+(page-1) * pageSize}} </td>
+             <!-- <td> -->
+              <!-- <ion-button expand="full" (click)="clear()" [routerLink]="['/forpayment/',it?.pid]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Pay</ion-button> -->
+              <!-- <ion-button expand="full"  class="ion-text-wrap min-max-width form-control-sm fon">Show</ion-button> -->
+            
+            <!-- </td> -->
+             <td>{{it.cname }}</td>
+             <td>{{it.datetime }}</td>                   
+              </tr>
+            </tbody>
+            </table>
+            <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+      
+          </div>
+
+
+          <div *ngIf="collapsessl" id="no-more-tabless">
+          <!-- <table class="table table-success table-striped"> -->
+            <input type="text" class="form-control form-control-sm"   placeholder="Search user mobile No" name="user" [(ngModel)]="mobil" (ngModelChange)="searchUserList()">  
+      
+            <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+            <thead>
+            <tr >           
+              <th>S.No</th>
+             <th>Action</th>
+              <th>Name</th>           
+              <th>address</th> 
+              <th>mobile</th> 
+              <th>Pass</th>            
+             
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+                <td>{{i+1+(page-1) * pageSize}} </td>
+             <td>
+              <ion-button *ngIf="comid != 1" expand="full" (click)="deleteUser(i)" class="ion-text-wrap min-max-width form-control-sm fon">del</ion-button>
+              <ion-button *ngIf="comid == 1" expand="full" (click)="resetpass(i)" class="ion-text-wrap min-max-width form-control-sm fon">reset pass</ion-button>
+        
+            </td>
+             <td>{{it.Name }}</td>
+             <td>{{it.address }}</td>  
+             <td>{{it.mobile }}</td> 
+             <td>{{ it.password }}</td>                   
+              </tr>
+            </tbody>
+            </table>
+            <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+      
+          </div>
+
+          <div *ngIf="collapsesslitem" id="no-more-tabless">
+            <!-- <table class="table table-success table-striped"> -->
+              <input type="text" class="form-control form-control-sm"   placeholder="Search Item Name" name="ItemName" [(ngModel)]="iname" (ngModelChange)="searchItemNameList()">  
+        
+              <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+              <thead>
+              <tr >           
+                <th>S.No</th>
+               <th>I_name</th>
+                <th>Date/TQyt</th>           
+                <th>A_qty/B/S</th> 
+                <th>B_amount</th> 
+                <th>S_amount</th>    
+                <th>Unit</th>                
+               
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+                  <td>{{i+1+(page-1) * pageSize}} </td>
+               <td>{{it.iname}}</td>
+               <td *ngIf="RULid!=14" >{{it.quantity }}</td> 
+               <td *ngIf="RULid!=13" >{{it.orderDate }}</td>
+        
+               <td>{{it.aquantity }}</td>  
+               <td>{{it.buyamount }}</td>  
+               <td>{{it.salesamount }}</td>  
+               <td>{{it.ListItem }}</td>                   
+                </tr>
+              </tbody>
+              </table>
+              <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+        
+            </div>
+            <div *ngIf="collapsesslitemBalance" id="no-more-tabless">
+              <!-- <table class="table table-success table-striped"> -->
+                <input type="text" class="form-control form-control-sm"   placeholder="Search Item Name" name="ItemName" [(ngModel)]="iname" (ngModelChange)="searchItemNameList()">  
+          
+                <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+                <thead>
+                <tr >           
+                  <th>S.No</th>
+                 <th>I_name</th>                          
+                  <th>A_qty/B/S</th> 
+                  <th>B_amount</th> 
+                  <th>S_amount</th>    
+                  <th>Unit</th>                
+                 
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+                    <td>{{i+1+(page-1) * pageSize}} </td>
+                 <td>{{it.iname}}</td>         
+                 <td>{{it.aquantity }}</td>  
+                 <td>{{it.buyamount }}</td>  
+                 <td>{{it.salesamount }}</td>  
+                 <td>{{it.ListItem }}</td>                   
+                  </tr>
+                </tbody>
+                </table>
+                <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+          
+              </div>
+  
+        </div>
+      </form>
+
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

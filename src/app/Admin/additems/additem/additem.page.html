@@ -1,0 +1,276 @@
+<ion-header  [translucent]="true">
+<ion-toolbar  color="secondary">
+  <ion-title class="logo">
+    <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button (click)="this.api.Resetpassword()" routerLink="/adlogin">L-Out</ion-button>    
+  </ion-buttons>
+</ion-toolbar>
+</ion-header> 
+
+
+<ion-content>
+  <form #userForm="ngForm">
+
+    <!-- {{userForm.value | json}} -->
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button routerLink="/admin" ><ion-icon name="arrow-back"></ion-icon></ion-button>Add Item
+        </ion-buttons>        
+      </div>
+     
+      <div class="card-body">
+       
+      
+        <!-- <select (blur)="validateTopic(companys.value)" (change)="validateTopic(companys.value)"  #companys="ngModel"
+        [class.is-invalid]="topicError && companys.touched"   class="form-control form-control-sm" name='companys' [(ngModel)]="prod.CampanyID">
+         <option value="default">Select My Company</option>
+         <option *ngFor="let com of company">{{com}}</option>
+       </select> 
+       <small class="text-danger" [class.d-none]="!topicError || companys.untouched">Please choose Company!</small><br/> -->
+       <ion-grid>
+        <ion-row>
+          <ion-col sizeLg="8" sizeMd="8" sizeXs="8"  class="line">
+       <select (blur)="validatecompany(companys.value)" disabled="true" (change)="validatecompany(companys.value)" required #companys="ngModel"
+       [class.is-invalid]="companyError && companys.touched"  class="form-control form-control-sm" name='companys'  [(ngModel)]=prod.CompanyID>
+        <option [value]="0">Select Company</option>
+       <option *ngFor="let com of prods" [value]="com.CampanyID">{{com.CmopanyName}}</option>
+       </select> <!--<br/> [options]="prods"  labelField="companyname" valueField="companyid"  -->
+      <small class="text-danger" [class.d-none]="!companyError || companys.untouched">Please choose Company!</small>
+    </ion-col>
+    <ion-col sizeLg="4" sizeMd="4" sizeXs="4"  class="line">
+       <select (blur)="validatecolor(color.value)" (change)="validatecolor(color.value)" required #color="ngModel"
+     [class.is-invalid]="colorError && color.touched" class="form-control form-control-sm" name='color' [(ngModel)]="prod.colorID">
+      <!-- <option [value]="0">Select unit</option> -->
+      <option *ngFor="let co of colors"  [value]="co.id">{{co.listitem}}</option>
+    </select> 
+    <small class="text-danger" [class.d-none]="!colorError ||color.untouched">choose color!</small>
+   </ion-col>
+    </ion-row>
+    </ion-grid>
+<!-- 
+
+       <select (blur)="validatecatagory(catagory.value)" (change)="validatecatagory(catagory.value)" name='catagory' #catagory="ngModel"
+       [class.is-invalid]="catagoryError && catagory.touched" class="form-control form-control-sm"  [(ngModel)]=prod.cid>
+        <option [value]="0">Select Catagory</option>
+        <option *ngFor="let cat of catagorys" [value]="cat.cid">{{cat.cname}}</option>
+      </select> 
+      <small class="text-danger" [class.d-none]="!catagoryError || catagory.untouched">Please choose Catagory!</small><br/> -->
+
+      <ion-item>
+        <!-- <ion-label *ngIF="show">Size {{show}}</ion-label> -->
+        <ion-label>Catagory {{ show}} </ion-label>
+        <ionic-selectable
+          item-content 
+          name='Catagory'
+          [(ngModel)]="prod.cid"
+          [items]="catagorys"
+          itemValueField="cid"
+          itemTextField="cname"
+          [canSearch]="true"
+          (onChange)="catagoryChange($event)"     
+           >
+        </ionic-selectable>
+      </ion-item>
+
+
+          <input type="text" name ='Item' [(ngModel)]=prod.iname class="form-control form-control-sm" required #Item="ngModel"
+          [class.is-invalid]="Item.invalid && Item.touched" id="Item" placeholder="Enter input Item Name">
+          <small class="text-danger" [class.d-none]="Item.valid || Item.untouched">Item Name is required !</small><br/>
+
+        <input type="text" name='Descripation' [(ngModel)]=prod.descripation class="form-control form-control-sm" required #Descripation="ngModel"
+        [class.is-invalid]="Descripation.invalid && Descripation.touched" id="Descripation" placeholder="Enter input Descripation Name">
+        <small class="text-danger" [class.d-none]="Descripation.valid || Descripation.untouched">Descripation Name is required !</small>
+
+
+  
+
+     
+        <ion-grid>
+          <ion-row>
+            <ion-col sizeLg="4" sizeMd="4" sizeXs="4"  class="line">
+              <input type="number" (keydown)="api.numberOnly($event)" name='Quantity' [(ngModel)]=prod.quantity class="form-control form-control-sm" required #Quantity="ngModel"
+              [class.is-invalid]="Quantity.invalid && Quantity.touched" id="Quantity" placeholder="Enter Quantity "> 
+              <small class="text-danger" [class.d-none]="Quantity.valid || Quantity.untouched">Quantity is required !</small>
+       </ion-col>
+       <ion-col sizeLg="4" sizeMd="4" sizeXs="4"  class="line">
+        <input type="number" (keydown)="api.numberOnly($event)" name='Price' [(ngModel)]=prod.price class="form-control form-control-sm" required #Price="ngModel"
+        [class.is-invalid]="Price.invalid && Price.touched" id="Price" placeholder="sales Price ">
+        <small class="text-danger" [class.d-none]="Price.valid || Price.untouched">Price is required !</small>
+      </ion-col>
+      <ion-col sizeLg="4" sizeMd="4" sizeXs="4"  class="line">
+        <input type="number" (keydown)="api.numberOnly($event)" name='rate' [(ngModel)]=prod.rate class="form-control form-control-sm" required #rate="ngModel"
+        [class.is-invalid]="rate.invalid && rate.touched" id="Price" placeholder="Enter rate ">
+        <small class="text-danger" [class.d-none]="rate.valid || rate.untouched">rate is required !</small>
+      </ion-col>
+       </ion-row>
+       </ion-grid>
+
+
+
+        <!-- <input type="file" name='customFile1' ngModel class="form-control" id="customFile1" />
+        <input type="file" name='customFile2' ngModel class="form-control" id="customFile2" />
+        <input type="file" name='customFile3' ngModel class="form-control" id="customFile3" />  -->
+        <ion-grid>
+          <ion-row>
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="6"  class="line">
+
+              <select (blur)="validatesize(size.value)" (change)="validatesize(size.value)" required  #size="ngModel"
+              [class.is-invalid]="sizeError && unit.touched"   class="form-control form-control-sm" name='size' [(ngModel)]="prod.SizeID">
+               <!-- <option [value]="0">Select unit</option> -->
+               <option *ngFor="let un of sizes"  [value]="un.id">{{un.listitem}}</option>
+             </select> 
+             <small class="text-danger" [class.d-none]="!sizeError || size.untouched">choose size!</small>
+           
+       </ion-col>
+       <ion-col sizeLg="6" sizeMd="6" sizeXs="6"  class="line">
+          <select (blur)="validateunit(unit.value)" (change)="validateunit(unit.value)" required  #unit="ngModel"
+        [class.is-invalid]="unitError && unit.touched"   class="form-control form-control-sm" name='unit' [(ngModel)]="prod.unit">
+         <!-- <option [value]="0">Select unit</option> -->
+         <option *ngFor="let un of units"  [value]="un.id">{{un.listitem}}</option>
+       </select> 
+       <small class="text-danger" [class.d-none]="!unitError || unit.untouched">choose unit!</small>
+      </ion-col>
+       </ion-row>
+       </ion-grid>
+
+
+        <ion-card>         
+          <ion-grid>
+            <ion-row>
+              <ion-col sizeLg="4" sizeMd="4" sizeXs="4"  class="line">
+
+                <img *ngIf="!prod.image && !collapse" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image1.click()">
+                <img *ngIf="!prod.image && this.editId && !collapse" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image1.click()" >
+                <img *ngIf="collapse" [src]="imageUrl" style="width: 130px;height: 90px;" alt="" (click)="image1.click()">
+                <img *ngIf="prod.image && !collapse" src="{{ api.baseUrl + this.prod?.image }}" style="width: 130px;height: 90px;" alt="" (click)="image1.click()">
+                <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewton($event.target.files);uploadFilenewton1($event.target.files)" #image1 name="image1" placeholder="image1" />
+               
+
+                
+       
+     
+              </ion-col>
+              &nbsp;
+              <ion-col class="line">
+
+                <img *ngIf="!prod.image1 && !collapse2" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image2.click()">
+                <img *ngIf="!prod.image1 && this.editId && !collapse2" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image2.click()" >
+                <img *ngIf="collapse2" [src]="imageUrl2" style="width: 130px;height: 90px;" alt="" (click)="image2.click()">
+                <img *ngIf="prod.image1 && !collapse2" src="{{ api.baseUrl + this.prod?.image1}}" style="width: 130px;height: 90px;" alt="" (click)="image2.click()">
+                <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewtontow($event.target.files);uploadFilenewton2($event.target.files)" #image2 name="image2" placeholder="image2" />
+               
+               
+               
+        
+              </ion-col>
+              &nbsp;
+              <ion-col class="line">
+
+                <img *ngIf="!prod.image2 && !collapse3" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image3.click()">
+                <img *ngIf="!prod.image2 && this.editId && !collapse3" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image3.click()" >
+                <img *ngIf="collapse3" [src]="imageUrl3" style="width: 130px;height: 90px;" alt="" (click)="image3.click()">              
+                <img *ngIf="prod.image2 && !collapse3" src="{{ api.baseUrl + this.prod?.image2 }}" style="width: 130px;height: 90px;" alt="" (click)="image3.click()">
+                <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewtonthree($event.target.files);uploadFilenewton3($event.target.files)" #image3 name="image3" placeholder="image3" />
+                        
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-card>
+       
+<!-- for mobile start -->
+
+<!-- <label>Image 1</label>
+<ion-card>
+
+  <img *ngIf="!prod.image && !collapse" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image.click()">
+  <img *ngIf="!prod.image && this.editId && !collapse" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image.click()" >
+  <img *ngIf="collapse" [src]="imageUrl" style="width: 130px;height: 90px;" alt="" (click)="image.click()">
+  <img *ngIf="prod.image && !collapse" src="{{ api.baseUrl + this.prod?.image }}" style="width: 130px;height: 90px;" alt="" (click)="image.click()">
+  <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewton($event.target.files);uploadFilenewton1($event.target.files)" #image name="image" placeholder="image1" />
+  -->
+
+
+<!--   
+  <img *ngIf="!prod.image && !collapse" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image1.click()">
+  <img *ngIf="!prod.image && this.editId && !collapse" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image1.click()" >
+  <img *ngIf="collapse" [src]="imageUrl" style="width: 130px;height: 90px;" alt="" (click)="image1.click()">
+  <img *ngIf="prod.image && !collapse" src="{{ api.baseUrl + this.prod?.image }}" style="width: 130px;height: 90px;" alt="" (click)="image1.click()">
+  <input type="file" hidden style="padding: 5px" accept="image1/*" (change)="uploadFilenewton($event.target.files);uploadFilenewton1($event.target.files)" #image1 name="image1" placeholder="image1" />
+  -->
+
+<!-- </ion-card> -->
+
+<!-- <label>Image 2</label>
+<ion-card>
+ <img *ngIf="!prod.image1 && !collapse2" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image2.click()">
+  <img *ngIf="!prod.image1 && this.editId && !collapse2" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image2.click()" >
+  <img *ngIf="collapse2" [src]="imageUrl2" style="width: 130px;height: 90px;" alt="" (click)="image2.click()">
+  <img *ngIf="prod.image1 && !collapse2" src="{{ api.baseUrl + this.prod?.image1}}" style="width: 130px;height: 90px;" alt="" (click)="image2.click()">
+  <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewtontow($event.target.files);uploadFilenewton2($event.target.files)" #image2 name="image2" placeholder="image2" />
+  -->
+<!-- 
+  <img *ngIf="!prod.image1 && !collapse2" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image2.click()">
+  <img *ngIf="!prod.image1 && this.editId && !collapse2" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image2.click()" >
+  <img *ngIf="collapse2" [src]="imageUrl2" style="width: 130px;height: 90px;" alt="" (click)="image2.click()">
+  <img *ngIf="prod.image1 && !collapse2" src="{{ api.baseUrl + this.prod?.image1}}" style="width: 130px;height: 90px;" alt="" (click)="image2.click()">
+  <input type="file" hidden style="padding: 5px" accept="image2/*" (change)="uploadFilenewtontow($event.target.files);uploadFilenewton2($event.target.files)" #image2 name="image2" placeholder="image2" />
+ -->
+ 
+<!-- </ion-card> -->
+ <!-- <label>Image 3</label>
+<ion-card>
+  <img *ngIf="!prod.image2 && !collapse3" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image3.click()">
+  <img *ngIf="!prod.image2 && this.editId && !collapse3" src="{{this.api.noImagePath}}" style="width: 130px;height: 90px;" alt="" (click)="image3.click()" >
+  <img *ngIf="collapse3" [src]="imageUrl3" style="width: 130px;height: 90px;" alt="" (click)="image3.click()">              
+  <img *ngIf="prod.image2 && !collapse3" src="{{ api.baseUrl + this.prod?.image2 }}" style="width: 130px;height: 90px;" alt="" (click)="image3.click()">
+  <input type="file" hidden style="padding: 5px" accept="image3/*" (change)="uploadFilenewtonthree($event.target.files);uploadFilenewton3($event.target.files)" #image3 name="image3" placeholder="image3" />
+ 
+</ion-card> -->
+
+<!-- for mobile end -->
+
+
+
+
+
+
+        <ion-card> 
+        <ion-grid> 
+          <ion-row>
+            <ion-col sizeLg="3" sizeMd="3" sizeXs="3" >
+              <button *ngIf="!editId" [disabled]="userForm.form.invalid || sizeError || unitError || colorError || image1.value=='' || image2.value=='' || image3.value==''" type="submit" (click)="patch()" class="btn btn-primary btn-sm fon">Submit</button>
+              <!-- || companyError || catagoryError -->
+              <button *ngIf="editId" [disabled]="userForm.form.invalid" (click)="Edit()" type="submit" class="btn btn-primary btn-sm fon">Edit</button>
+            </ion-col>     &nbsp;                 
+           <ion-col sizeLg="3" sizeMd="3" sizeXs="3" >
+            <button fill="outline" [routerLink]="['/itemdetails']" routerDirection="forward"  type="submit" class="btn btn-primary btn-sm fon">Show Data</button>
+            </ion-col>            
+            <ion-col sizeLg="2" sizeMd="2" sizeXs="2" >
+              <button *ngIf="editId" (click)="deleteItem()" type="submit" class="btn btn-primary btn-sm fon">Del</button>
+            </ion-col>
+            <ion-col sizeLg="2" sizeMd="2" sizeXs="2" >
+              <button  (click)="setpage()" type="submit" class="btn btn-primary btn-sm fon">Reset</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+     
+        <!-- <button [disabled]="userForm.form.invalid || companyError || catagoryError || unitError || image1.value=='' || image2.value=='' || image3.value==''" type="submit" (click)="patch(userForm)" class="btn btn-primary">Submit</button> -->
+
+      
+
+      </div>
+    </div>
+    </form>
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

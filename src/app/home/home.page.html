@@ -1,20 +1,132 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+  <ion-toolbar color="secondary">
+    <!-- <ion-title>Home </ion-title> -->
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+  <!-- <ion-button aria-flowto="left" fill="clear">Admin 9Login</ion-button>  -->
+
+    <ion-buttons slot="primary">   
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/adlogin">A-Log</ion-button><br/> 
+    </ion-buttons>
+  
+
+
+    <!-- <a class="header item px-1 ml-2" [routerLink]="['home']">
+      <img src="assets/download.png" alt="" height="30px" width="60px">
+      <strong class="ml-2 mr-2 ">MaheenERP</strong>
+   </a>
+    <div class="right menu pointer"><span class="ui item"><strong style="color: #1c92d2">Welcome-{{username}}</strong> |
+      <span (click)="logout()"> Log Out </span></span></div> -->
+
   </ion-toolbar>
+ 
+  <div class="card-header freeze ">         
+    <ion-toolbar>
+      <ion-searchbar name="search" [(ngModel)]=prod.product (ngModelChange)="focOrderSelected()"> <h6>Search Product</h6></ion-searchbar>
+    </ion-toolbar>    
+    <!-- <ion-buttons slot="start"> 
+      <ion-label  color="secondary">       
+        </ion-label>     
+    </ion-buttons>  -->
+    <span style="float:right;" class="fon1">     
+    <ion-label  color="secondary">
+      <!-- <h6>Hello: {{ use}} </h6> -->
+
+   <ion-buttons *ngIf="ui" slot="end">
+    <ion-button color="secondary" *ngIf="clopase" (click)="clopase=!clopase;Latestproduct()" class="ion-text-wrap min-max-width form-control-sm fon"><span>Latest {{total}} product</span></ion-button>     
+    <ion-button  color="secondary" *ngIf="!clopase" (click)="clopase=!clopase;Allproduct()" class="ion-text-wrap min-max-width form-control-sm fon"><span class="fon1">all product</span></ion-button>     
+
+    
+    <ion-button (click)="this.api.Resetpassword()" routerLink="/login" class="ion-text-wrap min-max-width form-control-sm fon">Hello: ({{ use}})u-out</ion-button>     
+  </ion-buttons>   </ion-label> </span> 
+
+  </div>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content [fullscreen]="true">
+  <form #userForm="ngForm">
+    <div class="card">
+
+      <div class="card-body chatdata">
+
+<!-- newton start 
+        <ion-grid> 
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let c of selectedcatagorys ; let i= index">
+              <ion-card>
+                <img *ngIf="!c.Cimage" src="{{this.api.noImagePath}}" style="width: 97%;" alt="" />
+                <img *ngIf="c.Cimage" src="{{ api.baseUrl + c.Cimage }}" style="width: 97%;"  alt="logo" />
+               <ion-card-content>
+                 <ion-label>
+                  <h3>Item:{{c.cname}}</h3>
+                  <h3>Shop:{{c.CmopanyName}}</h3>
+                 </ion-label>
+               </ion-card-content>
+               <ion-button [routerLink]="['/cos/',c.cid,c.CampanyID]" fill="outline" size="small" routerDirection="forward" click="addtoCart(c,i)" class="ion-text-wrap min-max-width form-control-sm fon">View</ion-button>
+            
+              </ion-card>
+            </ion-col>     
+  
+          </ion-row>
+        </ion-grid> 
+newton end -->
+<ion-grid> 
+  <ion-row class="ion-justify-content-center">
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="6" *ngFor="let c of selectedcatagorys ; let i= index" class="line">      
+      <ion-row>
+        <!-- <ion-slides [options]="slidersopt" zoom>
+          <ion-slide> -->
+        <ion-col size="12">
+          <img *ngIf="!c.Cimage" src="{{this.api.noImagePath}}" style="width: 97%;" alt="" />
+          <img *ngIf="c.Cimage" src="{{ api.baseUrl + c.Cimage }}" style="width: 97%;" alt="logo" />
+           <!-- <img alt="logo" height="70" [src]="c.Cimage"/> -->
+       
+        </ion-col>
+      <!-- </ion-slide>
+    </ion-slides> -->
+        <ion-col size="12">
+          <ion-label>
+            <h3>Item:{{c.cname}}</h3>
+          </ion-label>
+          <ion-label color="secondary">
+              <h3>Shop:{{c.CmopanyName}}</h3>
+          </ion-label>
+        </ion-col>
+        <ion-col size="2">
+          <!-- <ion-button fill="outline" size="small" click="addtoCartw(c)">
+             <ion-icon nane="cart"></ion-icon>
+          </ion-button> -->
+        </ion-col>
+        <ion-col size="10" class="ion-text-right">
+          <!-- <ion-button [routerLink]="['/itemview/',c.id]" fill="outline" size="small" routerDirection="forward" click="addtoCart(c,i)">Item View -->
+            <!-- <ion-button [routerLink]="['/cos/',c.cid,c.CampanyID]" fill="outline" size="small" routerDirection="forward" click="addtoCart(c,i)">View -->
+              <ion-button [routerLink]="['/cos/',c.cid,c.CampanyID]" fill="outline" size="small" routerDirection="forward" click="addtoCart(c,i)" class="ion-text-wrap min-max-width form-control-sm fon">View
+              <!-- </ion-button> -->
+
+              
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-grid> 
+ 
+</div>
+</div>
+
+</form>
+
 </ion-content>
+<!-- <br/>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer> -->

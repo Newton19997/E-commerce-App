@@ -1,0 +1,114 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">    
+    <ion-buttons slot="start">
+      <!-- <ion-menu-button menu="main-menu"></ion-menu-button> -->
+    </ion-buttons>
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">      
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/login">L-out</ion-button>       
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #userForm="ngForm">
+    <!-- {{userForm.value | json}} -->
+    <!-- <hr/> -->
+    <!-- {{prod | json}} -->
+    <div class="card">
+      <div class="card-header">
+      
+        <ion-buttons slot="start">
+          <ion-button routerLink="/datereport" ><ion-icon name="arrow-back"></ion-icon></ion-button>Add Product
+        </ion-buttons>
+      </div>
+      <div class="card-body"> 
+        product Image  : 
+        <img *ngIf="collapse" [src]="imageUrl" style="width: 60px;height: 60px;" alt="" (click)="image.click()" >
+        <img *ngIf="!prod.productImage && !collapse" [src]="imageUrl" style="width: 60px;height: 60px;"  alt="" (click)="image.click()">
+         <img *ngIf="prod.productImage && !collapse" src="{{api.baseUrl + this.prod?.productImage }}" style="width: 60px;height: 60px;" alt="" (click)="image.click()">
+         <!-- <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewton($event.target.files);uploadFilenewton1($event.target.files)" #image name="image" placeholder="image" /> -->
+         <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewton($event.target.files);fileChanged($event)" #image name="image" placeholder="image" />
+        
+         
+          <input type="text" class="form-control form-control-sm" required #productName="ngModel" [class.is-invalid]="productName.invalid && productName.touched" id="productName" placeholder="Enter input product Name" name="productName" [(ngModel)]="prod.productName">  
+        
+         <small class="text-danger" [class.d-none]="productName.valid || productName.untouched">productName is required !</small> <br/>
+         
+          <input type="number" (keydown)="api.numberOnly($event)" class="form-control form-control-sm"  required #price="ngModel" [class.is-invalid]="price.invalid && price.touched" TextMode="MultiLine" id="price" placeholder="Enter input price" name="price" [(ngModel)]="prod.price"> 
+          <small class="text-danger" [class.d-none]="price.valid || price.untouched">price required !</small><br/> 
+                 
+        <input type="tel" class="form-control form-control-sm" pattern="^\d{11}$" required #phone="ngModel" [class.is-invalid]="phone.invalid && phone.touched " id="MobileNoID" placeholder="Enter Contact No" name="MobileNo" [(ngModel)]="prod.contactNo"> 
+        <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">Mobile number must be 11 digits required !</small> <br/>
+    
+
+       
+        <ion-grid> 
+          <ion-row>
+            <ion-col sizeLg="2" sizeMd="2" sizeXs="2" >
+              <button [disabled]="userForm.form.invalid" (click)="patch()" type="submit" class="btn btn-primary btn-xs fon">Submit</button>
+            </ion-col>
+            &nbsp;         
+            <!-- <ion-col sizeLg="7" sizeMd="7" sizeXs="7" >
+              <input type="text" class="form-control form-control-sm"   placeholder="Search Company Name" name="Company" [(ngModel)]="searchcom" (ngModelChange)="SearchCompany()">  
+      
+            </ion-col>            -->
+            <!-- <ion-col sizeLg="2" sizeMd="2" sizeXs="2" >
+              <button *ngIf="comid"   (click)="deleteCompany()" type="submit" class="btn btn-primary btn-xs fon">Del</button>
+            </ion-col> -->
+          </ion-row>
+        </ion-grid>
+       
+        
+       
+
+        <div id="no-more-tables">
+        <!-- <table class="table table-success table-striped"> -->
+          <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+          <thead>
+          <tr >           
+            <th>S.No</th>
+            <th>Action</th>
+            <th>ProductName</th>  
+            <th>price</th>  
+            <th>ContactNo</th>           
+            
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let com of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+              <td>{{i+1+(page-1) * pageSize}} </td>
+           <td> 
+            
+            <!-- <ion-icon name="trash-outline"></ion-icon>||<ion-icon name="create-outline" fill="outline" [routerLink]="['/company/',com?.companyid]" routerDirection="forward" ></ion-icon> -->
+            <ion-button  fill="outline" [routerLink]="['/local-bazzar/',com?.locID]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Edit</ion-button>
+        
+            <ion-button  expand="full" (click)="deleteItem(i)" class="ion-text-wrap min-max-width form-control-sm fon">del</ion-button>
+        
+          </td>
+           <td>{{com.productName }}</td>
+           <td>{{com.price }}</td>
+           <td>{{com.contactNo }}</td>
+            </tr>
+          </tbody>
+          </table>
+          <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+ 
+        </div>
+       
+      </div>
+    </div>
+
+  </form>
+
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

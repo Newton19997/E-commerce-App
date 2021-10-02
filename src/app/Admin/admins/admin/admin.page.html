@@ -1,0 +1,305 @@
+<ion-app>
+  <!-- <ion-header  [translucent]="true">
+    <ion-toolbar color="secondary">      
+        <ion-title slot="primary">Online Shopping</ion-title> 
+      <ion-title>Admin</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-buttons>
+      
+      <ion-buttons slot="primary">
+      <ion-button routerLink="/admin">Admin Login</ion-button> 
+        <ion-button routerLink="/admin">LogOut</ion-button>         onclick="toggleReorder()"  
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>--> 
+
+
+<ion-header  [translucent]="true">
+  <ion-toolbar  color="secondary">
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/home">L-out</ion-button>   
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-header> 
+
+
+
+
+  <ion-content>
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button ><ion-icon name="arrow-back"></ion-icon></ion-button>Well Come Admin
+        </ion-buttons>        
+      </div>
+      </div>
+      <div class="card-body">
+    <ion-list>      
+      <!-- <ion-item routerLink="/home">
+        <ion-icon slot="end" name="logo-ionic"></ion-icon>
+        <ion-label>Home</ion-label>
+        <ion-badge slot="end"></ion-badge>
+      </ion-item> -->
+      <!-- <ion-item routerLink="/addcatagory"> -->
+        <ion-item routerLink="/addcatagory">       
+          <ion-icon slot="end" name="contract-outline"></ion-icon>
+        <ion-label>Add Catagory</ion-label>
+        <ion-badge color="secondary" slot="end"></ion-badge>
+      </ion-item >
+      <ion-item routerLink="/additem">
+        <ion-icon slot="end" name="basket-outline"></ion-icon>        
+        <ion-label>Add Item</ion-label>
+        <ion-badge color="tertiary" slot="end"></ion-badge>
+      </ion-item>
+      <!-- <ion-item routerLink="/addquantity"> -->
+        <ion-item routerLink="/addqtydetail">        
+        <ion-icon slot="end" name="file-tray-stacked-outline"></ion-icon>        
+        <ion-label>Add Quantity</ion-label>
+        <ion-badge color="success" slot="end"></ion-badge>
+      </ion-item>
+      <ion-item routerLink="/vieworder">
+        <ion-icon slot="end" name="layers-outline"></ion-icon>       
+        <ion-label>View order</ion-label>
+        <ion-badge color="warning" slot="end"></ion-badge>
+      </ion-item>
+      <ion-item routerLink="/viewpayment">        
+        <ion-icon  slot="end"  name="boat-outline"></ion-icon>
+        <ion-label>View Payment</ion-label>
+        <ion-badge color="danger" slot="end"></ion-badge>
+      </ion-item>
+      <!-- <ion-item routerLink="/addfeedback">
+        <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>        
+        <ion-label>Add Feedback</ion-label>
+        <ion-badge color="light" slot="end"></ion-badge>
+      </ion-item> -->
+
+      <ion-item *ngIf="company" routerLink="/company">
+        <ion-icon slot="end" name="compass-outline"></ion-icon>
+       
+        <ion-label>Add Company</ion-label>
+        <ion-badge color="light" slot="end"></ion-badge>
+      </ion-item>
+
+      <ion-item routerLink="/adchangepassword">
+        <ion-icon slot="end" name="construct-outline"></ion-icon>
+       
+        <ion-label>Admin Password Change</ion-label>
+        <ion-badge color="light" slot="end"></ion-badge>
+      </ion-item>
+ 
+      <!-- <ion-item routerLink="/home">
+        <ion-icon slot="end" name="logo-ionic"></ion-icon>
+        <ion-label>End</ion-label>
+        <ion-badge color="dark" slot="end"></ion-badge>
+      </ion-item> -->
+    </ion-list>
+    </div>
+  </ion-content>
+
+  <ion-footer >
+    <ion-toolbar class="foterhight" color="warning">
+      <ion-title>
+        Do Shopping joyfully....
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+
+</ion-app>
+<!--/*
+
+
+<ion-header  [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Admin</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-buttons slot="primary">
+      <ion-button routerLink="/admin" >Admin Login</ion-button> 
+      <!-- onclick="toggleReorder()" --> 
+      <!--
+        
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ui container pt-5">
+    <div class="ui link divided stackable four cards">
+
+      <a class="card raised cardmy2" [routerLink]="['/planning/offset-block-issue']">
+        <div class="ui centered my-3">
+          <div class="ui grid w-100">
+            <div class="nine wide column">
+              <h2 class="ml-3">Add Catagory </h2>
+            </div>
+            <div class="seven wide column">
+              <div class="ui image">
+                <img src="assets/2482848.png" style="height: 65px; width: 65px">
+              </div>
+            </div>
+          </div>
+        </div>
+      </a> 
+      <a class="card raised cardmy2" [routerLink]="['/planning/offset-wastage']">
+        <div class="ui centered my-3">
+          <div class="ui grid w-100">
+            <div class="nine wide column">
+              <h2 class="ml-3">Add Item</h2>
+            </div>
+            <div class="seven wide column">
+              <div class="ui image">
+                <img src="assets/2482808.png" style="height: 65px; width: 65px">
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a class="card raised cardmy2" [routerLink]="['/planning/planing/5']">
+        <div class="ui centered my-3">
+          <div class="ui grid w-100">
+            <div class="nine wide column">
+              <h2 class="ml-3">ADD QUANTITY</h2>
+            </div>
+            <div class="seven wide column">
+              <div class="ui image">
+                <img src="assets/2482848.png" style="height: 65px; width: 65px">
+              </div>
+            </div>
+          </div>
+        </div>
+      </a> 
+
+      <a class="card raised cardmy2" [routerLink]="['/planning/design/5']">
+        <div class="ui centered my-3">
+          <div class="ui grid w-100">
+            <div class="nine wide column">
+              <h2 class="ml-3">VIEW ORDER</h2>
+            </div>
+            <div class="seven wide column">
+              <div class="ui image">
+                <img src="assets/harp.svg" style="height: 65px; width: 65px">
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+  
+      <a class="card raised cardmy2" [routerLink]="['/planning/prof-reading/5']">
+        <div class="ui centered my-3">
+          <div class="ui grid w-100">
+            <div class="nine wide column">
+              <h2 class="ml-3">VIEW PAYMENT</h2>
+            </div>
+            <div class="seven wide column">
+              <div class="ui image">
+                <img src="assets/2482826.png" style="height: 65px; width: 65px">
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+  
+      <a class="card raised cardmy2" [routerLink]="['/planning/printing/5']">
+        <div class="ui centered my-3">
+          <div class="ui grid w-100">
+            <div class="nine wide column">
+              <h2 class="ml-3">FEEDBACK</h2>
+            </div>
+            <div class="seven wide column">
+              <div class="ui image">
+                <img src="assets/cassette.svg" style="height: 65px; width: 65px">
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+  
+      <a class="card raised cardmy2" [routerLink]="['/planning/cutting/5']">
+        <div class="ui centered my-3">
+          <div class="ui grid w-100">
+            <div class="nine wide column">
+              <h2 class="ml-3">LOGOUT</h2>
+            </div>
+            <div class="seven wide column">
+              <div class="ui image">
+                <img src="assets/maracas.svg" style="height: 65px; width: 65px">
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+     </div> 
+     </div>
+newton
+</ion-content>
+
+
+
+*/-->
+
+
+
+
+
+<!-- 
+<ion-app>
+  <ion-split-pane contentId="content" >
+  <ion-menu contentId="content" menuId="secondmain" >
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+         main
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+<ion-content>
+  <ion-list>
+    <ion-menu-toggle>
+      <ion-item routerLink="/addcatagory">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ioc-label>Addcatagory</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item routerLink="/additem">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ioc-label>additem</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item routerLink="/addquantity">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ioc-label>addquantity</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item routerLink="/vieworder">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ioc-label>vieworder</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item routerLink="/viewpayment">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ioc-label>viewpayment</ioc-label>
+      </ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item routerLink="/addfeedback">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ioc-label>addfeedback</ioc-label>
+      </ion-item>  
+    </ion-menu-toggle> 
+  </ion-list>
+</ion-content>
+  </ion-menu>
+  <ion-router-outlet id="content"></ion-router-outlet>
+</ion-split-pane>
+</ion-app>
+ -->

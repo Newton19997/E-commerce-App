@@ -1,0 +1,109 @@
+
+<ion-header  [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button routerLink="/admin">LogOut</ion-button>    
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-header> 
+  <ion-content>
+    <form #userFrom="ngForm">
+  
+      <!-- {{userFrom.value | json}} -->
+      <div class="card">
+        <div class="card-header">
+          <ion-buttons slot="start">
+            <ion-button routerLink="/admin"><ion-icon name="arrow-back"></ion-icon></ion-button>For payment
+          </ion-buttons>        
+        </div>
+        </div>
+        <div class="card-body">
+          <!-- <ion-grid>    
+          <ion-row>
+            <ion-col size-sm="5" size="5" >
+              <ion-button expand="full" (click)="loadfor_payment()" class="ion-text-wrap min-max-width form-control-sm fon">Payment</ion-button>
+            </ion-col>
+    
+            <ion-col size-sm="7" size="7" class="ion-text-center">
+                <ion-button expand="full" (click)="loadfor_partialpayment()" class="ion-text-wrap min-max-width form-control-sm fon">partialpayment</ion-button>
+            </ion-col>
+       
+        </ion-row>       
+        </ion-grid>     -->
+          
+         
+    <div id="no-more-tables">
+   
+        <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+        <thead>
+        <tr >           
+          <th>S.No</th>
+          
+          <th>Iname</th>           
+          <th>Qty</th>
+          <td>Price</td>
+          <th>Tprice</th>             
+         
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let it of items ; let i = index">
+            <td>{{i+1}} </td>
+          <!-- <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+            <td>{{i+1+(page-1) * pageSize}} </td> -->
+         <!-- <td>
+          <ion-button expand="full" class="ion-text-wrap min-max-width form-control-sm fon">Pay</ion-button>
+           <ion-icon name="create-outline" fill="outline" [routerLink]="['/additem/',it?.iid]" routerDirection="forward" >Pay</ion-icon> -->
+          <!-- {{com.companyid }} -->
+        <!-- </td> -->
+         <td>{{it.iname }}</td>
+         <td>{{it.quntity }}</td>
+         <td>{{it.price }}</td>
+         <td>{{it.totalprice }}</td>
+        
+          </tr>
+        </tbody>
+        </table>
+        <!-- <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>  -->
+  
+      </div>
+      <ion-label color="primary">Name:</ion-label> <ion-label color="secondary">{{vname}}</ion-label> <br/>
+      <ion-label color="primary">Type:</ion-label> <ion-label color="secondary">{{vtype}}</ion-label> <br/>
+      <ion-label color="primary">Amount:</ion-label> <ion-label color="secondary">{{vamount}}</ion-label> <br/>
+      <ion-item>
+        <ion-label color="primary">Pay Amount:</ion-label>
+        <ion-input type="number" required (keydown)="api.numberOnly($event)" #payAmount="ngModel" [class.is-invalid]="payAmount.invalid && payAmount.touched" name="payAmount" (ngModelChange)="chackQty($event)" [(ngModel)]="vpayamount"></ion-input><ion-label color="danger">BD</ion-label>
+      </ion-item>
+      <!-- <ion-label color="primary">Pay Amount:</ion-label> <ion-label color="secondary"><input type="text" class="form-control form-control-sm"  name="payAmount" [(ngModel)]="vpayamount"> </ion-label><ion-label color="danger">BD</ion-label> <br/> -->
+
+
+  
+           <ion-grid>    
+          <ion-row>
+            <ion-col size-sm="4" size="4" >
+              <ion-button expand="full" [disabled]="userFrom.form.invalid" (click)="Full_payment()" class="ion-text-wrap min-max-width form-control-sm fon">FullPay</ion-button>
+            </ion-col>
+            <!-- routerLink="/viewpayment" routerDirection="forward" -->
+            <ion-col size-sm="5" size="5" class="ion-text-center">
+                <ion-button expand="full" [disabled]="userFrom.form.invalid" (click)="loadfor_partialpayment()"  class="ion-text-wrap min-max-width form-control-sm fon">Partialpay</ion-button>
+            </ion-col>
+              <ion-col size-sm="3" size="3" >
+              <ion-button expand="full" (click)="reset()" class="ion-text-wrap min-max-width form-control-sm fon">Reset</ion-button>
+            </ion-col>
+       
+        </ion-row>       
+        </ion-grid>     
+        </div>
+      </form>
+
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,134 @@
+
+<ion-header  [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/login">U-out</ion-button>    
+    </ion-buttons>
+  </ion-toolbar>
+
+  <div class="card-header">
+    <!-- <ion-buttons slot="start">
+      <ion-button routerLink="/home" ><ion-icon name="arrow-back"></ion-icon></ion-button>Chat
+    </ion-buttons>  -->        
+    <!-- <img [src]="imageUrl" style="width: 40px;height: 40px;" alt="" (click)="image.click()"> -->
+         
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" *ngFor="let prod of userImage ; let i= index" >
+          <ion-row>
+        <ion-col size="9">
+          
+          <!-- <img *ngIf="!prod.image && !collapse" src="{{this.api.noImagePath}}" style="width: 40px;height: 40px;" alt="" (click)="image.click()"> -->
+          <!-- <img *ngIf="!prod.image && this.editId" src="{{this.api.noImagePath}}" style="width: 40px;height: 40px;" alt="" (click)="image.click()" > -->
+         
+          <img *ngIf="collapse" [src]="imageUrl" style="width: 40px;height: 40px;" alt="" (click)="image.click()">
+         <img *ngIf="!prod.image && !collapse" [src]="imageUrl" style="width: 40px;height: 40px;" alt="" (click)="image.click()">
+          <img *ngIf="prod.image && !collapse" src="{{ api.baseUrl + prod.image }}" style="width: 40px;height: 40px;" alt="" (click)="image.click()">
+          <!-- <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewton($event.target.files);uploadFilenewton1($event.target.files)" #image name="image" placeholder="image" /> -->
+          <input type="file" hidden style="padding: 5px" accept="image/*" (change)="uploadFilenewton($event.target.files);fileChanged($event)" #image name="image" placeholder="image" />
+          <label class="form-control-sm fon1">HI : {{ prod.Uname}}</label> 
+          <img *ngIf="prod.active" src="{{this.api.active}}" style="width: 8px;height: 8px;"/>               
+        </ion-col>              
+          <ion-col size="3">
+            <span class="fon1"><ion-button fill="outline" [routerLink]="['/chatroom']" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon1">chatroom</ion-button></span> 
+        </ion-col> 
+
+        <ion-col size="4"> 
+            <ion-button (click)="uploadFile()" class="ion-text-wrap min-max-width form-control-sm fon">Pic-add</ion-button>
+               
+        </ion-col>
+        <ion-col size="8">  
+          <input type="text" class="form-control form-control-sm"   placeholder="Search user mobilNo" name="user" [(ngModel)]="mobilNo" (ngModelChange)="searchUserList()">  
+                   
+        </ion-col>
+
+      </ion-row>
+    </ion-col>
+      </ion-row>          
+    </ion-grid>
+
+  </div>
+
+
+  </ion-header> 
+  
+  
+  <ion-content>
+    <form #userFrom="ngForm">
+  
+      <!-- {{userFrom.value | json}} -->
+      <div class="card">
+       
+        </div>
+        <div class="card-body">
+          <!-- <ion-list>
+            <ion-list-header>
+              last chat list
+            </ion-list-header>
+          </ion-list> -->
+
+
+          <ion-list>
+       
+            <span class="fon">  Add friend List</span>
+            <ion-item *ngFor="let item of friend_OR_notFriend ; let i = index">
+              <ion-avatar slot="start">
+                <!-- <img *ngIf="item.Cimage" src="{{ api.baseUrl + item.Cimage }}" style="width: 130px;height: 90px;" alt="logo" > -->
+                <img *ngIf="!item.image" src="{{this.api.noImagePath}}" />
+                <img *ngIf="item.image" src="{{ api.baseUrl + item.image }}">
+                
+              </ion-avatar>
+              <ion-label>
+                <h4>{{item.fname}}</h4>
+                <p><span class="fon">{{item.mobile}}<img *ngIf="item.active" src="{{this.api.active}}" style="width: 8px;height: 8px;"/></span>
+                <!-- <h3><ion-button *ngIf="item.status==0" class="ion-text-wrap min-max-width form-control-sm fon"> Add</ion-button></h3> -->
+               
+                  <!-- <ion-button *ngIf="item.status==0" (click)="add(i)" class="ion-text-wrap min-max-width form-control-sm fon1"> Add</ion-button> -->
+                  &nbsp; <a id="link" *ngIf="item.status==0" style="cursor:pointer;text-decoration:underline;" (click)="add(i)">Add</a> &nbsp;
+                 <!-- <ion-button *ngIf="item.status==1" class="ion-text-wrap min-max-width form-control-sm fon1">Request</ion-button>   -->
+                 &nbsp;  <a id="link" *ngIf="item.status==1" style="cursor:pointer;text-decoration:underline;">Request</a> &nbsp;    
+                  <!-- <ion-button *ngIf="item.status==3" (click)="Confirm(i)" class="ion-text-wrap min-max-width form-control-sm fon1"> Confirm</ion-button> -->
+                  &nbsp; <a id="link" *ngIf="item.status==3" style="cursor:pointer;text-decoration:underline;" (click)="Confirm(i)">Confirm</a>  &nbsp;
+                  <!-- <ion-button *ngIf="item.status==2" class="ion-text-wrap min-max-width form-control-sm fon1">Friend</ion-button>    -->
+                  &nbsp; <a id="link" *ngIf="item.status==2" style="cursor:pointer;text-decoration:underline;">Friend</a>     &nbsp; 
+                  <!-- <ion-button *ngIf="item.status==2 || item.status==3" (click)="Cancel(i)" class="ion-text-wrap min-max-width form-control-sm fon1">Cancel</ion-button> -->
+                  &nbsp;  <a id="link" *ngIf="item.status==2 || item.status==3" style="cursor:pointer;text-decoration:underline;" (click)="Cancel(i)">Cancel</a> &nbsp; 
+                </p>
+               
+              </ion-label>
+            </ion-item>           
+          </ion-list>
+
+
+        </div>
+      </form>
+  </ion-content>
+  <ion-footer >
+    <ion-toolbar class="foterhight" color="light">
+      <ion-title>
+        Do Shopping joyfully....
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+  <!-- <ion-footer >
+    <ion-toolbar class="foterhight" color="light">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="10">
+          <ion-textarea autoGrow="true" class="message-input" rows="1" maxLength="500" [(ngModel)]="newMsg"></ion-textarea>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button expand="block" fill="clear" color="primary" [disabled]="newMsg === ''"
+          class="msg-btn" (click)="sendMessage()">
+        <ion-icon name="send" slot="icon-only"></ion-icon>
+        </ion-button>
+        </ion-col>
+      </ion-row>  
+    </ion-toolbar>
+  </ion-footer> -->
+

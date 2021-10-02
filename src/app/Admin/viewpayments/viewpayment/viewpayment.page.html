@@ -1,0 +1,99 @@
+
+
+<ion-header  [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/adlogin">L-out</ion-button>     
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-header> 
+  
+  
+  
+  
+  <ion-content>
+    <form #userFrom="ngForm">
+  
+      <!-- {{userFrom.value | json}} -->
+      <div class="card">
+        <div class="card-header">
+          <ion-buttons slot="start">
+            <ion-button routerLink="/admin"><ion-icon name="arrow-back"></ion-icon></ion-button>View Payment
+          </ion-buttons>        
+        </div>
+        </div>
+        <div class="card-body">
+          <ion-grid>    
+          <ion-row>
+            <ion-col size-sm="5" size="5" >
+              <ion-button expand="full" (click)="loadfor_payment()" class="ion-text-wrap min-max-width form-control-sm fon">Payment</ion-button>
+            </ion-col>
+    
+            <ion-col size-sm="7" size="7" class="ion-text-center">
+                <ion-button expand="full" (click)="loadfor_partialpayment()" class="ion-text-wrap min-max-width form-control-sm fon">partialpayment</ion-button>
+            </ion-col>       
+        </ion-row>       
+        </ion-grid>
+        <ion-grid>    
+          <ion-row>
+            <ion-col size-sm="9" size="9" >
+        <input type="text" class="form-control form-control-sm"   placeholder="Search User Name" name="User" [(ngModel)]="searchUser" (ngModelChange)="SearchUserNane()">      
+      </ion-col>
+    
+      <ion-col size-sm="3" size="3" class="ion-text-center">
+        <ion-button expand="full" (click)="reset()" class="ion-text-wrap min-max-width form-control-sm fon">Reset</ion-button>
+        
+      </ion-col>
+      </ion-row>       
+    </ion-grid>
+  
+         
+    <div id="no-more-tables">
+      <!-- <table class="table table-success table-striped"> -->
+        <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+        <thead>
+        <tr >           
+          <th>S.No</th>
+          <th>Action</th>
+          <th>Name</th>           
+          <th>Type</th>
+          <td>Bank</td>
+          <th>Amount</th>             
+          <th>Pay Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+            <td>{{i+1+(page-1) * pageSize}} </td>
+         <td>
+          <ion-button expand="full" (click)="clear()" [routerLink]="['/forpayment/',it?.pid]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Pay</ion-button>
+           <!-- <ion-icon name="create-outline" fill="outline" [routerLink]="['/additem/',it?.iid]" routerDirection="forward" >Pay</ion-icon> -->
+          <!-- {{com.companyid }} -->
+        </td>
+         <td>{{it.uname }}</td>
+         <td>{{it.type }}</td>
+         <td>{{it.bank }}</td>
+         <td>{{it.amount }}</td>
+         <td>{{it.payAmount }}</td>
+          </tr>
+        </tbody>
+        </table>
+        <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+  
+      </div>
+  
+  
+        </div>
+      </form>
+
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

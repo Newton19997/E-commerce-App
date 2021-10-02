@@ -1,0 +1,59 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>modal</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <form #userForm="ngForm">
+    <div class="card">
+      <div class="card-header">
+
+<ion-item>
+  <ion-label>Forgot Password </ion-label>
+  <ion-button (click)="CloseModal()" size="small" slot="end">Close</ion-button>
+</ion-item>
+</div>
+<div class="card-body">
+
+<ion-item>
+  <br/>
+  <ion-label>Select Company</ion-label>
+  <ionic-selectable
+    item-content 
+    name='company'
+    [(ngModel)]="prod.CompanyID"
+    [items]="prods"
+    itemValueField="companyid"
+    itemTextField="companyname"
+    [canSearch]="true"
+    (onChange)="portChange($event)"
+ >
+  </ionic-selectable>
+</ion-item> <br/>
+
+    <!-- <h5 class="card-title">User Name</h5>
+    <input type="text" class="form-control" id="User" placeholder="User Name"><br/>   -->
+    <input type="text" name ='User' class="form-control form-control-sm" required #User="ngModel"
+      [class.is-invalid]="User.invalid && User.touched" id="Item" placeholder="Enter User Mobile OR Email Number" [(ngModel)]=prod.mobile>
+      <small class="text-danger" [class.d-none]="User.valid || User.untouched">User Mobile OR Email is required !</small><br/>
+      
+      <div class="col text-center">
+        <span class="text-center"><button type="submit" [disabled]="userForm.form.invalid" (click)="ChackLogin()"  class="btn btn-primary btn-sm">Forgot</button></span> 
+       
+      </div>
+
+
+      <br/> <br/>
+      <div *ngIf="comNO != null" class="col text-center">
+        <ion-label color="secondary">
+ ** OR **<br/>
+  Another Option <br/>
+  You can call Company Admin <br/>
+  This CompanyNo: <span color="warning">{{comNO}}</span> 
+</ion-label>
+</div>
+</div>
+</div>
+</form>
+</ion-content>

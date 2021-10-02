@@ -1,0 +1,131 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">   
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+  <!-- <ion-button aria-flowto="left" fill="clear">Admin 9Login</ion-button>  -->
+
+    <ion-buttons slot="primary">
+      <!-- <ion-button routerLink="/admin" >Login</ion-button>  -->
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/login">U-out</ion-button> 
+      <!-- onclick="toggleReorder()" -->
+    </ion-buttons>
+
+  </ion-toolbar>
+  <div class="card-header freeze">       
+    <ion-toolbar>
+      <ion-searchbar name="search" [(ngModel)]=prod.product (ngModelChange)="funLoadItemCompanyAndCatagoryWise()" >Search Product</ion-searchbar>
+    </ion-toolbar>
+    <ion-buttons slot="start">        
+       <!-- <ion-button routerLink=""  (click)="close()"><ion-icon name="arrow-back"></ion-icon></ion-button>Well Come User Login -->
+       <!-- routerLink="/admin" -->           
+    </ion-buttons>        
+  </div>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+ 
+
+    <form #userForm="ngForm">
+      <div class="card">
+    
+        <div class="card-body chatdata">
+
+<!-- newton start -->
+        <ion-grid> 
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let c of selecteditems ; let i= index">
+              <ion-card>
+                <img *ngIf="!c.image" src="{{this.api.noImagePath}}" style="width: 97%;" alt="" />
+                <img *ngIf="c.image" src="{{ api.baseUrl + c.image }}" style="width: 97%;"  alt="logo" />
+               <ion-card-content>
+                 <ion-label>
+                  <h3> Item Name : {{c.iname}}</h3>
+                  <h3>Price : {{c.price}}  BD</h3>
+                 </ion-label>
+               </ion-card-content>
+               <ion-button [routerLink]="['/itemview/',c.CompanyID,c.cid,c.iid]" fill="outline" size="small" routerDirection="forward" click="addtoCart(c,i)" class="ion-text-wrap min-max-width form-control-sm fon">Buy</ion-button>
+              </ion-card>
+            </ion-col>     
+  
+          </ion-row>
+        </ion-grid> 
+<!--newton end -->
+
+  <!-- <ion-row>
+    <ion-col sizeLg="4" sizeMd="4" sizeXs="4" *ngFor="let c of myObje" class="line">
+      
+      <ion-row>
+    <ion-col size="6">
+      ion-col [size="3"]
+    </ion-col>
+  
+    <ion-col size="6">
+      ion-col [size="3"]
+    </ion-col>
+  </ion-row>
+</ion-col>
+</ion-row> -->
+
+
+
+<!--newton start
+<ion-grid > 
+  <ion-row>
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="6" *ngFor="let c of selecteditems ; let i= index" class="line">
+      
+      <ion-row>
+
+        <ion-col size="12">
+          <img *ngIf="c.image" src="{{ api.baseUrl + c.image }}" style="height: 90%;" alt="logo" />
+          <img *ngIf="!c.image" src="{{this.api.noImagePath}}" style="height: 90%;" alt="" />
+      
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-label>
+               Item Name : {{c.iname}}
+          </ion-label>
+          <ion-label color="secondary">
+              <h3>Price : {{c.price}}  BD</h3>
+          </ion-label>
+        </ion-col>
+        <ion-col size="6">
+       
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">                    
+            <ion-button [routerLink]="['/itemview/',c.CompanyID,c.cid,c.iid]" fill="outline" size="small" routerDirection="forward" click="addtoCart(c,i)" class="ion-text-wrap min-max-width form-control-sm fon">Buy            
+          
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-col>
+  </ion-row>
+</ion-grid> 
+newton end -->
+
+
+
+
+ 
+</div>
+</div>
+</form>
+ 
+
+
+</ion-content>
+<!-- <br/>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer> -->

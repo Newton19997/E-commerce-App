@@ -1,0 +1,20 @@
+https://www.goalsarena.co/category/world-cup/
+https://www.udemy.com/?utm_source=adwords-brand&utm_medium=udemyads&utm_campaign=Brand-Udemy_la.EN_cc.ROW&utm_term=_._ag_80315195513_._ad_450687451854_._de_c_._dm__._pl__._ti_kwd-310556426868_._li_9069450_._pd__._&utm_term=_._pd__._kw_udemy_._&matchtype=e&gclid=EAIaIQobChMIoLKKz-6w7QIVyA0rCh2YxwVSEAAYASAAEgKOi_D_BwE
+https://www.youtube.com/watch?v=3YLyT4LRJUc
+https://meeraacademy.com/download-online-shopping-website-in-asp-net/
+https://www.youtube.com/watch?v=5MYR8KJ4BZQ
+https://getbootstrap.com/docs/5.0/content/tables/
+https://www.youtube.com/watch?v=HMK4P_jx0y8
+https://www.youtube.com/watch?v=BSAXU0s7heQ
+https://www.youtube.com/watch?v=yPBBWaQamWs
+https://www.youtube.com/watch?v=Wa6QXQj6UaM
+https://stackoverflow.com/questions/60825844/how-to-pass-multiple-route-parameters-in-ionic-angular
+https://www.youtube.com/watch?v=c61wr1ZsHzY
+https://www.youtube.com/watch?v=dDUcm8dcCEs
+https://www.youtube.com/watch?v=zUeG6VgdKSc
+https://stackoverflow.com/questions/60264933/runtime-error-with-angular-9-and-ivy-cannot-read-property-id-of-undefined-z
+schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+https://stackoverflow.com/questions/39428132/custom-elements-schema-added-to-ngmodule-schemas-still-showing-error
+///dropdown
+https://www.freakyjolly.com/angular-how-to-get-dropdown-selected-text-using-common-service-method/#.YCyEb3lxWUn
+https://stackoverflow.com/questions/47740630/bootstrap-select-live-search-is-not-working

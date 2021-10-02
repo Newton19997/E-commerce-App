@@ -1,0 +1,136 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content> -->
+
+<ion-header  [translucent]="true">
+<ion-toolbar color="secondary">
+  <ion-buttons slot="start">
+    <ion-menu-button menu="main-menu"></ion-menu-button>
+  </ion-buttons>
+  <ion-title class="logo">
+    <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button *ngIf="login != null" (click)="this.api.Resetpassword()" routerLink="/home">U-out</ion-button>    
+    <ion-button *ngIf="login == null" (click)="this.api.Resetpassword()" routerLink="/login">L-In</ion-button> 
+  </ion-buttons>
+</ion-toolbar>
+</ion-header> 
+<!-- <ion-pane> -->
+ <!-- <div class="bar bar-header bar-energized">
+    <h3 class="title">Add Catagory</h3>
+  </div> -->
+
+<ion-content>
+
+  <form #userForm="ngForm">
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <!-- <h4>admin Login</h4> -->
+           <ion-button routerLink="" ><ion-icon name="arrow-back"></ion-icon></ion-button> User Login
+           <!-- routerLink="/admin" -->
+           
+        </ion-buttons>
+        
+      </div>
+      <div class="card-body">
+      <br/>
+      <br/>
+
+      <!-- <select (blur)="validatecompany(companys.value)" (change)="validatecompany(companys.value)" required #companys="ngModel"
+      [class.is-invalid]="companyError && companys.touched"  class="custom-select form-control-sm" name='companys' placeholder="Select Company" [(ngModel)]=prod.CompanyID>
+       <option [value]="0">Select Company</option>
+      <option *ngFor="let com of prods" [value]="com.companyid">{{com.companyname}}</option>
+      </select> <br/> 
+     <small class="text-danger" [class.d-none]="!companyError || companys.untouched">Please choose Company!</small><br/> -->
+
+     <ion-item>
+      <ion-label>Select Company</ion-label>
+      <ionic-selectable
+        item-content 
+        name='company'
+        [(ngModel)]="prod.CompanyID"
+        [items]="prods"
+        itemValueField="companyid"
+        itemTextField="companyname"
+        [canSearch]="true"
+        (onChange)="portChange($event)"
+     >
+      </ionic-selectable>
+    </ion-item> <br/>
+
+        <!-- <h5 class="card-title">User Name</h5>
+        <input type="text" class="form-control" id="User" placeholder="User Name"><br/>   -->
+        <input type="text" name ='User' class="form-control form-control-sm" required #User="ngModel"
+          [class.is-invalid]="User.invalid && User.touched" id="Item" placeholder="Enter User Mobile OR Email Number" [(ngModel)]=prod.mobile>
+          <small class="text-danger" [class.d-none]="User.valid || User.untouched">User Mobile OR Email is required !</small><br/>
+        
+        <!-- <h5 class="card-title">Passward</h5>
+        <input type="text" class="form-control" id="Passward" placeholder="Passward"><br/>       -->
+        <input type="password" name ='password' class="form-control form-control-sm" required #password="ngModel"
+        [class.is-invalid]="password.invalid && password.touched" id="password" placeholder="Enter User password" [(ngModel)]=prod.password>
+        <small class="text-danger" [class.d-none]="password.valid || password.untouched">User password is required !</small><br/>
+       
+        <div class="col text-center">
+        <span class="text-center"><button type="submit" [disabled]="userForm.form.invalid" (click)="ChackLogin()"  class="btn btn-primary btn-sm">Log In</button></span> 
+        <!-- routerLink="/admin" -->
+        <p class="text-center">Need an account? <a routerLink="/registration" fill="outline" size="small" routerDirection="forward">Registration</a> </p>
+        <p class="text-center">Have you forgot password? <button type="submit" (click)="OpenModal()" class="btn btn-primary btn-sm">Forgot</button></p>
+     
+      </div>
+
+      </div>
+    </div>
+
+  </form>
+ <!-- <form>
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button routerLink="/home" (click)="close()"><ion-icon name="arrow-back"></ion-icon></ion-button>User login
+        </ion-buttons>
+        
+      </div>
+      <div class="card-body">
+
+        <h5 class="card-title">Company Name</h5>
+        <select class="form-control" name='company' ngModel>
+          <option selected>Select My Company</option>
+          <option *ngFor="let com of company">{{com}}</option>
+        </select> 
+
+        <h5 class="card-title">User Name</h5>
+        <input type="text" class="form-control" id="User" placeholder="User Name"><br/>   
+        <h5 class="card-title">Passward</h5>
+        <input type="text" class="form-control" id="Passward" placeholder="Passward"><br/>      
+        <button type="submit"  routerLink="/home" class="btn btn-primary">Submit</button>
+
+      </div>
+    </div>
+
+    
+  </form>
+ -->
+</ion-content>
+<!-- <div class="bar bar-footer bar-calm">
+  <h3 class="title">This footer </h3>
+</div> -->
+
+<!-- </ion-pane> -->
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

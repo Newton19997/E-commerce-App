@@ -1,0 +1,139 @@
+
+<ion-header  [translucent]="true"> 
+<ion-toolbar color="secondary">
+  <ion-title class="logo">
+    <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button (click)="this.api.Resetpassword()" routerLink="/adlogin">L-out</ion-button>    
+  </ion-buttons>
+</ion-toolbar>
+</ion-header> 
+
+<ion-content>
+  <form #userForm="ngForm">
+
+  <!-- {{userForm.value | json}} -->
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button routerLink="/addqtydetail" ><ion-icon name="arrow-back"></ion-icon></ion-button>Add Quantity
+        </ion-buttons>        
+      </div>
+      </div>
+      <div class="card-body">   
+
+        <select (blur)="validatecompany(companys.value)" disabled="true" (change)="validatecompany(companys.value)" required #companys="ngModel"
+        [class.is-invalid]="companyError && companys.touched"  class="form-control form-control-sm" name='companys'  [(ngModel)]=prod.CompanyID (ngModelChange) = "getcompanyWisecatagorys()">
+         <option [value]="0">Select Company</option>
+        <option *ngFor="let com of prods" [value]="com.CampanyID">{{com.CmopanyName}}</option>
+        </select> <!--<br/> [options]="prods"  labelField="companyname" valueField="companyid"  -->
+       <small class="text-danger" [class.d-none]="!companyError || companys.untouched">Please choose Company!</small><br/>   
+     
+        <!-- <select (blur)="validateTopic(companys.value)" (change)="validateTopic(companys.value)"  #companys="ngModel"
+        [class.is-invalid]="topicError && companys.touched"   class="form-control form-control-sm" name='companys' [(ngModel)]="prod.CampanyID" (ngModelChange) = "getcompanyWisecatagorys()">
+         <option value="default">Select My Company</option>
+         <option *ngFor="let com of company">{{com}}</option>
+       </select> 
+       <small class="text-danger" [class.d-none]="!topicError || companys.untouched">Please choose Company!</small><br/> -->
+
+       
+
+       <select (blur)="validatecatagory(catagory.value)" disabled="true" (change)="validatecatagory(catagory.value)" name='catagory' #catagory="ngModel"
+       [class.is-invalid]="catagoryError && catagory.touched" class="form-control form-control-sm"  [(ngModel)]=prod.cid (ngModelChange) = "getcompanyandcatagoryWiseitems()">
+        <option [value]="0">Select Catagory</option>
+        <option *ngFor="let cat of companyWisecatagorys" [value]="cat.cid">{{cat.cname}}</option>
+      </select> 
+      <small class="text-danger" [class.d-none]="!catagoryError || catagory.untouched">Please choose Catagory!</small><br/>
+
+<!-- 
+       <select (blur)="validatecatagory(catagory.value)" (change)="validatecatagory(catagory.value)" name='catagory' #catagory="ngModel"
+       [class.is-invalid]="catagoryError && catagory.touched" class="form-control form-control-sm"  ngModel>
+        <option value="default">Select Catagory</option>
+        <option *ngFor="let cat of catagorys">{{cat}}</option>
+      </select> 
+      <small class="text-danger" [class.d-none]="!catagoryError || catagory.untouched">Please choose Catagory!</small><br/> -->
+
+
+        <select (blur)="validateitem(Item.value)" disabled="true" (change)="validateitem(Item.value)"  [class.is-invalid]="itemError && Item.touched"
+        class="form-control form-control-sm" name='Item' #Item="ngModel" [(ngModel)]=prod.iid (ngModelChange) = "getcompanyandcatagoryanditemwiseDetalis()">
+        <option [value]="0">Select Item</option>         
+          <option *ngFor="let cat of companyWisecatagoryitems" [value]="cat.iid">{{cat.iname}}</option>
+        </select> 
+        <small class="text-danger" [class.d-none]="!itemError || Item.untouched">Please choose Item!</small><br/>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col sizeLg="4" sizeMd="4" sizeXs="4">
+              <label type="label" *ngFor="let item of itemsDelails" for="exampleInputEmail1">Balance Qty: {{Idwiseprod[0].aquantity}} </label> 
+              <!-- {{itemsDelails.aquantity}}  {{item.aquantity}} -->
+            </ion-col>
+            <ion-col sizeLg="4" sizeMd="4" sizeXs="4">
+             Sales price
+              <input type="number" required #price="ngModel" (keyup)="checkprice($event)" (keydown)="api.numberOnly($event)" [class.is-invalid]="price.invalid && price.touched"  name='price' [(ngModel)]=this.prices class="form-control form-control-sm" id="price" placeholder="Change price"><br/>  
+            </ion-col>
+               <!-- (keydown)="api.numberOnly($event)" (change)="checkprice($event)" (keyup)="onChange($event)"  -->
+            
+            <small class="text-danger" [class.d-none]="price.valid || price.untouched">price is required !</small>
+            <ion-col sizeLg="4" sizeMd="4" sizeXs="4">
+             buy price
+              <input type="number" required #rate="ngModel" (keyup)="checkrate($event)"  (keydown)="api.numberOnly($event)" [class.is-invalid]="rate.invalid && rate.touched"  name='rate' [(ngModel)]=this.rates class="form-control form-control-sm" id="rate" placeholder="Change rate"><br/>  
+                          <!-- (keydown)="api.numberOnly($event)" (change)="checkrate($event)" (keyup)="onChange($event)"  -->
+            
+            </ion-col>
+            <small class="text-danger" [class.d-none]="rate.valid || rate.untouched">rate is required !</small>
+          </ion-row>
+          
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row>
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="6"> 
+              Add Qty            
+              <input type="number" required #Quantity="ngModel"  (keyup)="checkAddqty($event)"  (keydown)="api.numberOnly($event)" [class.is-invalid]="Quantity.invalid && Quantity.touched"  name='Quantity' [(ngModel)]=prod.addQty class="form-control form-control-sm" id="Quantity" placeholder="Add Qty"><br/>  
+              <!-- (keydown)="api.numberOnly($event)" (change)="checkAddqty($event)" (keyup)="onChange($event)"  -->
+              <small class="text-danger" [class.d-none]="Quantity.valid || Quantity.untouched">Quantity is required !</small>
+            </ion-col>
+            <ion-col sizeLg="6" sizeMd="6" sizeXs="6">  
+              Reduce Qty          
+              <input type="number" required #ReduceQtys="ngModel" (keydown)="api.numberOnly($event)" (keyup)="onChange($event)" [class.is-invalid]="ReduceQtys.invalid && ReduceQtys.touched"  name='ReduceQtys' [(ngModel)]="prod.ReduceQty" class="form-control form-control-sm" id="ReduceQtys" placeholder="Reduce Qty"><br/>  
+              <!-- (keydown)="api.numberOnly($event)" (change)="checkReduce($event)" (keyup)="onChange($event)"  -->
+            </ion-col>
+            <small class="text-danger" [class.d-none]="ReduceQtys.valid || ReduceQtys.untouched">Reduce Qty is required !</small>
+        </ion-row>
+       
+        </ion-grid>
+       
+       
+        
+        <ion-grid>
+          <ion-row>
+          <ion-col sizeLg="4" sizeMd="4" sizeXs="4"> 
+            <button [disabled]="userForm.form.invalid" (click)="patch()" type="submit" class="btn btn-primary btn-sm fon">Add Qty</button>
+          </ion-col>
+          <ion-col sizeLg="4" sizeMd="4" sizeXs="4">  
+            <button [disabled]="userForm.form.invalid" (click)="Edit()" type="submit" class="btn btn-primary btn-sm fon">Reduce Qty</button>
+          </ion-col>
+          <ion-col sizeLg="4" sizeMd="4" sizeXs="4">
+          <button [disabled]="userForm.form.invalid" (click)="btnprice()" type="submit" class="btn btn-primary btn-sm fon">Change price</button>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      
+    
+        
+       
+      
+
+
+      </div>
+    </form>
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,212 @@
+<ion-header  [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/login">U-out</ion-button>    
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="card-header freeze">  
+        
+    <ion-item *ngFor="let prod of chatuserImage ; let i= index">
+      <ion-avatar slot="start">               
+        <img *ngIf="prod.image" src="{{ api.baseUrl + prod.image }}">  
+        <img *ngIf="!prod.image" src="{{this.api.noImagePath}}" />            
+      </ion-avatar>
+      <ion-label>
+        <h4>{{prod.Uname}}</h4>
+        <p><span class="fon2">{{prod.userid_mobile}} <img *ngIf="prod.active" src="{{this.api.active}}" style="width: 8px;height: 8px;"/></span>              
+        </p>            
+      </ion-label>
+      </ion-item>
+      <ion-row>
+        <ion-col size="4">
+          <span class="fon2"> <ion-buttons>
+           <ion-button routerLink="/chatroom" ><ion-icon name="arrow-back"></ion-icon></ion-button>Go Chatroom
+          </ion-buttons></span>
+        </ion-col>
+        <ion-col size="2">
+         <span class="fon2"> <ion-buttons>
+          <ion-button routerLink="/chatroom" ><ion-icon name="call"></ion-icon></ion-button>
+         </ion-buttons></span>
+       </ion-col>
+       <ion-col size="2">
+         <span class="fon2"> <ion-buttons>
+          <ion-button routerLink="/chatroom" ><ion-icon name="videocam"></ion-icon></ion-button>
+         </ion-buttons></span>
+       </ion-col>
+        
+
+      </ion-row>     
+  </div>
+
+  </ion-header> 
+
+  <ion-content>
+    <form #userFrom="ngForm">
+  
+      <!-- {{userFrom.value | json}} -->
+      <div class="card">
+  
+       </div>
+
+        <div class="card-body chatdata">
+
+
+          <ion-grid>
+            <ion-text color="medium" text-center>
+              <p>You joined the chat as {{ currentUser }}</p>
+            </ion-text>
+            <ion-row *ngFor="let message of chatuser let i = index">
+              <!-- <ion-buttons (click)="co()"> -->
+           
+              <ion-col size="9" *ngIf="message.userid_mobile != currentUser" class="message my-message">
+                <!-- <b>{{ message.uname }}</b><br> -->
+                <span>{{ message.message }}</span>
+                <img *ngIf="message.image" src="{{ api.baseUrl + message.image }}"> 
+                <!-- <span>{{ audiocall}}</span>
+                <span>{{ vediocall }}</span>   -->
+                <div class="time" text-right><br>{{ message.entrydate}}</div> 
+                <!-- <div class="time" text-right><br>{{ message.entrydate | date:'short' }}</div> -->
+          </ion-col>
+     
+      <!-- </ion-buttons> -->
+        <!-- <ion-buttons (click)="co()"> -->
+     
+              <ion-col offset="3" size="9" *ngIf="message.userid_mobile == currentUser" class="message other-message">
+                <!-- <b>{{ message.uname }}</b><br> -->
+                <span>{{ message.message }}</span>
+                 <img *ngIf="message.image" src="{{ api.baseUrl + message.image }}"> 
+                <!-- <span>{{ audiocall }}</span>
+                <span>{{ vediocall }}</span>  -->
+               
+                <div class="time" text-right><br>{{ message.entrydate }}  <a id="link" style="cursor:pointer;text-decoration:underline;" (click)="show(i)">Removed</a></div>
+              </ion-col>
+             
+            
+          <!-- </ion-buttons> -->
+         
+            </ion-row>
+          </ion-grid>
+
+        
+          
+
+
+        </div>
+
+<ion-infinite-scroll position="top" threshold="5%" (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll-content position="bottom" loadingSpinner="bubbles" loadingText="Loading more data......">
+  </ion-infinite-scroll-content>
+
+</ion-infinite-scroll>
+
+
+<!-- <ion-content> 
+  <ion-button (click)="toggleInfiniteScroll()" expand="block">
+    Toggle Infinite Scroll
+  </ion-button>
+  <div class="card-body chatdata">
+  <ion-list>
+  <ion-grid>
+    <ion-text color="medium" text-center>
+      <p>You joined the chat as {{ currentUser }}</p>
+    </ion-text>
+    <ion-row *ngFor="let message of chatuser">
+ 
+      <ion-col size="9" *ngIf="message.userid_mobile != currentUser" class="message my-message">
+        <b>{{ message.uname }}</b><br>
+        <span>{{ message.message }}</span>
+        <img *ngIf="message.image" src="{{ api.baseUrl + message.image }}"> 
+        <span>{{ audiocall}}</span>
+        <span>{{ vediocall }}</span>  
+        <div class="time" text-right><br>{{ message.entrydate}}</div> 
+         -->
+ <!--  </ion-col>
+ 
+      <ion-col offset="3" size="9" *ngIf="message.userid_mobile == currentUser" class="message other-message">
+        <b>{{ message.uname }}</b><br>
+        <span>{{ message.message }}</span>
+         <img *ngIf="message.image" src="{{ api.baseUrl + message.image }}"> 
+        <span>{{ audiocall }}</span>
+        <span>{{ vediocall }}</span> 
+        <div class="time" text-right><br>{{ message.entrydate }}</div>
+      </ion-col>
+ 
+    </ion-row>
+  </ion-grid>
+</ion-list>
+</div>
+
+  <ion-infinite-scroll position="top" threshold="5%" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content> -->
+
+
+
+
+
+
+      </form>
+  </ion-content>
+
+  <ion-footer >
+    <ion-toolbar class="foterhight" color="light">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2" *ngIf="!writing">
+          <span class="fon2"><ion-buttons>
+            <ion-button><ion-icon name="camera"></ion-icon></ion-button>
+          </ion-buttons>
+           </span>
+          </ion-col>
+          <ion-col size="2" *ngIf="!writing">
+           <span class="fon2">
+            <!-- <img  [src]="imageUrl" style="width: 35px;height: 36px;" alt="" (click)="image.click()" > -->
+            <input type="file" hidden  style="padding: 5px" accept="image/*" (change)="uploadFilenewton($event.target.files);uploadFilenewton1($event.target.files)" #image name="image" placeholder="image" />
+         
+            <ion-buttons><ion-button (click)="image.click()">
+                 
+            <ion-icon name="cloud-upload"></ion-icon></ion-button>
+          </ion-buttons>
+           </span>
+          </ion-col>
+          <ion-col size="2" *ngIf="!writing">
+           <span class="fon2">
+            <ion-buttons>
+              <ion-button (click)="clopase=!clopase">
+                <ion-icon *ngIf="!clopase" name="mic-off"></ion-icon>
+                <ion-icon *ngIf="clopase" name="mic"></ion-icon></ion-button>
+            </ion-buttons>
+           </span>
+
+          <!-- <ion-button style="height:40px; width: 40px;"><ion-icon style="height:20px; width: 20px;" name="camera"></ion-icon>&nbsp;</ion-button>  -->
+          <!-- <ion-button style="height:40px; width: 40px;"><ion-icon name="cloud-upload"></ion-icon>&nbsp;</ion-button>          
+          <ion-button style="height:40px; width: 40px;" (click)="clopase=!clopase">
+          <ion-icon *ngIf="!clopase" name="mic-off"></ion-icon>
+          <ion-icon *ngIf="clopase" name="mic"></ion-icon></ion-button> -->
+        </ion-col>
+          <ion-col [ngStyle]="{'size' : size}">
+          <ion-textarea autoGrow="true" (click)="onKeyPress()" (keyup)="onChange($event)"  class="message-input" rows="1" maxLength="500" [(ngModel)]="newMsg"></ion-textarea>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button expand="block" fill="clear" color="primary" [disabled]="hide"
+          class="msg-btn" (click)="sendMessage()">
+        <ion-icon name="send" slot="icon-only"></ion-icon>
+        </ion-button>
+        </ion-col>
+      </ion-row>
+  
+    </ion-toolbar>
+  </ion-footer>
+
+  <!-- size="6" -->
+
+  <!-- [disabled]="newMsg === ''" -->

@@ -1,0 +1,126 @@
+
+<ion-header  [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/login">L-out</ion-button>     
+    </ion-buttons>
+  </ion-toolbar>
+  <div class="card-header">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home"><ion-icon name="arrow-back"></ion-icon></ion-button>Feedback, {{no}} 
+      <ion-button color="secondary" *ngIf="clopase" (click)="clopase=!clopase; FriendSalseproduct()" class="ion-text-wrap min-max-width form-control-sm fon"><span>Friend Salse new product</span></ion-button>     
+      <ion-button color="secondary" *ngIf="!clopase" (click)="clopase=!clopase; PaymentStatus()" class="ion-text-wrap min-max-width form-control-sm fon"><span class="fon1">Payment Status</span></ion-button>     
+      
+    </ion-buttons> 
+    <!--  -->
+         
+  </div>
+  </ion-header> 
+  
+  
+  
+  
+  <ion-content>
+    <form #userFrom="ngForm">
+  
+      <!-- {{userFrom.value | json}} -->
+      <div class="card">
+     
+    
+        <div class="card-body"> 
+
+          <div id="no-more-tables" *ngIf="clopase">
+            <!-- <table class="table table-success table-striped"> -->
+              <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+              <thead>
+              <tr >           
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Type</th>           
+                <th>Amount</th>
+                <td>Pay Amount</td>
+                <td>Left Amount</td>
+               
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+                  <td>{{i+1+(page-1) * pageSize}} </td>
+               <td>
+                {{it.username }}
+                <!-- <ion-button expand="full" (click)="clear()" [routerLink]="['/forpayment/',it?.pid]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Pay</ion-button> -->
+                <!-- <ion-button *ngIf="RULid!=3 && RULid!=4 && RULid!=9 && RULid!=10" expand="full" (click)="deleteItem(i)" class="ion-text-wrap min-max-width form-control-sm fon">del</ion-button> -->
+              
+              </td>
+               <td>{{it.type }}</td>
+               <td>{{it.amount }}</td>
+               <td>{{it.payamount }}</td>  
+               <td>{{it.leftamount }}</td>       
+                </tr>
+              </tbody>
+              </table>
+              <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+        
+            </div>
+
+<!-- local_bazar_top20Product add -->
+            <div id="no-more-tables" *ngIf="!clopase">
+              <!-- <table class="table table-success table-striped"> -->
+                <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+                <thead>
+                <tr >           
+                  <th>S.No</th>                 
+                  <th>friendNo</th>                 
+                  <th>itemname</th>  
+                  <th>price</th>  
+                  <th>Image</th>  
+                  <th>Contact</th>     
+                     
+    
+                  <!--<th>Date</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr *ngFor="let com of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index"> -->
+                  <tr *ngFor="let com of items let i = index">
+                    <!-- <td>{{i+1+(page-1) * pageSize}} </td> -->
+                    <td>{{i+1}} </td>
+                 
+                 <td>{{com.user_mobile }}</td>
+                 <td>{{com.productName }}</td>
+                 <td>{{com.price }}</td>
+                 <td>
+                  <ion-thumbnail slot="start">
+                  <img *ngIf="com.productImage" src="{{ api.baseUrl + com.productImage }}" style="width: 40px;height: 40px;" alt="logo" >
+                </ion-thumbnail>
+                </td>
+                 <td>{{com.contactNo }}</td>    
+                
+                  </tr>
+                </tbody>
+                </table>
+                <!-- <ion-label *ngIf="totalPrice" slot="end">Total price: {{this.totalPrice}} BD</ion-label> -->
+                
+                <!-- <ngb-pagination [collectionSize]="items.length" api.numberOnly($event) [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>  -->
+       
+              </div>
+  
+  
+        </div>
+      </div>
+      </form>
+
+</ion-content>
+
+  <ion-footer >
+    <ion-toolbar class="foterhight" color="warning">
+      <ion-title>
+        Do Shopping joyfully....
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+
+

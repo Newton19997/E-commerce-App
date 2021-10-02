@@ -1,0 +1,203 @@
+<ion-header  [translucent]="true">
+<ion-toolbar  color="secondary">
+  <ion-title class="logo">
+    <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button (click)="this.api.Resetpassword()" routerLink="/adlogin">L-out</ion-button>   
+  </ion-buttons>
+</ion-toolbar>
+</ion-header> 
+
+<ion-content>
+  <form #userFrom="ngForm">
+
+    <!-- {{userFrom.value | json}} -->
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button routerLink="/admin" ><ion-icon name="arrow-back"></ion-icon></ion-button>Order View
+        </ion-buttons>        
+      </div>
+      </div>
+      <div class="card-body"> 
+   
+        <ion-grid> 
+<!-- 
+          <ion-row>
+          
+            <ion-col size-sm="6" size="6" >    
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control form-control-sm" placeholder="From date"
+                         name="dp" [(ngModel)]="model" (ngModelChange)="checkFromDate()" ngbDatepicker #d="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary form-control-sm calendar" (click)="d.toggle()" type="button"><ion-icon name="calendar-outline"></ion-icon></button>
+                  </div>
+                </div>
+              </div>
+        </ion-col> 
+        <ion-col size-sm="6" size="6" class="ion-text-center">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control form-control-sm" placeholder="To date"
+                   name="dp2" [(ngModel)]="model2" (change)="checkToDate($event)" ngbDatepicker #d2="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary form-control-sm calendar" (click)="d2.toggle()" type="button"><ion-icon name="calendar-outline"></ion-icon></button>
+            </div>
+          </div>
+        </div>  
+      </ion-col>   
+        </ion-row> -->
+        You can show only 1 month report 
+        <ion-row>          
+          <ion-col size-sm="6" size="6" >    
+            <input type="text" disabled name ='txtFromDate' [(ngModel)]="FDate"  class="form-control form-control-sm" required #txtFromDate="ngModel"
+          [class.is-invalid]="txtFromDate.invalid && txtFromDate.touched" id="Item" placeholder="FromDate">
+          
+        <input type="date" name='FromDate' value=""  class="form-control form-control-sm" (change)="checkFromDate($event)" [(ngModel)]="FromDate" id="FromDate" placeholder="From Date">      
+         
+      </ion-col>            
+          <ion-col size-sm="6" size="6" class="ion-text-center">
+            <input type="text" disabled name ='txtToDate' [(ngModel)]="TDate"  class="form-control form-control-sm" required #txtToDate="ngModel"
+            [class.is-invalid]="txtToDate.invalid && txtToDate.touched" id="ToDate" placeholder="To Date">
+            <input type="date" name='ToDate'  class="form-control form-control-sm" (change)="checkToDate($event)" [(ngModel)]="ToDate" id="ToDate" placeholder="To Date">         
+          
+          </ion-col>     
+      </ion-row> 
+      Order List
+          <ion-row>
+        
+            <ion-col size-sm="6" size="6" >
+              <ion-button expand="full" [routerLink]="['/report/',1]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Day Not Pay </ion-button>
+            </ion-col>
+    
+            <ion-col size-sm="6" size="6" class="ion-text-center">
+                <ion-button expand="full" [routerLink]="['/report/',7,this.FDate,this.TDate]" class="ion-text-wrap min-max-width form-control-sm fon">Date Wise Not Pay</ion-button>
+            </ion-col>
+       
+        </ion-row> 
+        <ion-row>
+          <ion-col size-sm="6" size="6" >
+            <ion-button expand="full" [routerLink]="['/report/',2]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Day Wise Pay</ion-button>
+          </ion-col>
+  
+          <ion-col size-sm="6" size="6" class="ion-text-center">
+              <ion-button expand="full" [routerLink]="['/report/',8,this.FDate,this.TDate]" class="ion-text-wrap min-max-width form-control-sm fon">Date Wise Pay</ion-button>
+          </ion-col>
+     
+      </ion-row> 
+      Payment Of Order
+      <ion-row>
+       
+        <ion-col size-sm="6" size="6" >
+          <ion-button expand="full" [routerLink]="['/report/',3]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Day Payment</ion-button>
+        </ion-col>
+
+        <ion-col size-sm="6" size="6" class="ion-text-center">
+            <ion-button expand="full" [routerLink]="['/report/',9,this.FDate,this.TDate]" class="ion-text-wrap min-max-width form-control-sm fon">Date Wise Payment</ion-button>
+        </ion-col>
+   
+    </ion-row>   
+    <ion-row>
+      <ion-col size-sm="6" size="6" >
+        <ion-button expand="full" [routerLink]="['/report/',4]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Day Partial Pay</ion-button>
+      </ion-col>
+
+      <ion-col size-sm="6" size="6" class="ion-text-center">
+          <ion-button expand="full" [routerLink]="['/report/',10,this.FDate,this.TDate]" class="ion-text-wrap min-max-width form-control-sm fon">Date Partial Pay</ion-button>
+      </ion-col>
+ 
+  </ion-row> 
+  Company Item
+  <ion-row>
+  
+    <ion-col size-sm="6" size="6" >
+      <ion-button expand="full" [routerLink]="['/report/',5]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Item List</ion-button>
+    </ion-col>
+
+    <ion-col size-sm="6" size="6" class="ion-text-center">
+        <ion-button expand="full" [routerLink]="['/report/',6]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Min Qty Item</ion-button>
+    </ion-col>
+
+</ion-row>  
+
+
+
+<ion-row>  
+  <ion-col size-sm="6" size="6" >
+    <ion-button expand="full" [routerLink]="['/report/',13]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Item Summery</ion-button>
+  </ion-col>
+
+  <ion-col size-sm="6" size="6" class="ion-text-center">
+    <ion-button expand="full" [routerLink]="['/report/',14]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Item details</ion-button>
+</ion-col>
+</ion-row> 
+
+
+<ion-row>  
+  <ion-col size-sm="6" size="6" >
+    <ion-button expand="full" [routerLink]="['/report/',11]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Catagory List</ion-button>
+  </ion-col>
+
+  <ion-col size-sm="6" size="6" class="ion-text-center">
+    <ion-button expand="full" [routerLink]="['/report/',12]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">User list</ion-button>
+</ion-col>
+</ion-row> 
+<ion-row>
+  <ion-col>
+    <ion-button expand="full" [routerLink]="['/report/',15]" routerDirection="forward" class="ion-text-wrap min-max-width form-control-sm fon">Item Summery Total Balance</ion-button>
+  </ion-col>
+</ion-row>
+        </ion-grid>    
+    
+        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+
+        <!-- <table class="table table-success table-striped">
+      
+          <thead>
+          <tr >
+            <th>
+              
+            </th>
+            <th>Image</th>
+            <th>Item Nmae</th>
+            <th>Item Name</th>
+            <th>Item Qty</th>           
+            <th>Item Price</th>
+            <th>Total Price</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr class="table-active">
+              ...
+            </tr>
+            <tr>
+              ...
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td colspan="2" class="table-active">Larry the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+          </table> -->
+
+
+      </div>
+    </form>
+
+
+
+
+
+
+
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

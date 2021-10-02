@@ -1,0 +1,208 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/login">U-out</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <form #userForm="ngForm">
+
+    <!-- {{userFrom.value | json}} -->
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button [routerLink]="['/cos/',cId,companyID]">
+            <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>Item View
+        </ion-buttons>
+      </div>
+    </div>
+    <div class="card-body">   
+      <ion-grid>
+        <!-- <ion-row>
+    <ion-col sizeLg="4" sizeMd="4" sizeXs="4" *ngFor="let c of myObje" class="line">
+      
+      <ion-row>
+    <ion-col size="6">
+      ion-col [size="3"]
+    </ion-col>
+  
+    <ion-col size="6">
+      ion-col [size="3"]
+    </ion-col>
+  </ion-row>
+</ion-col>
+</ion-row> -->
+
+<!-- <div (mouseover)="changeText=true" (mouseout)="changeText=false">
+  <span *ngIf="!changeText">Hide</span>
+  <span *ngIf="changeText">Show</span>
+</div> -->
+
+<ion-row>
+  <ion-col sizeLg="12" sizeMd="12" sizeXs="12" *ngFor="let c of selecteditems" class="line">
+
+    <ion-row>
+<ion-slides [options]="slidersopt" zoom>
+          <ion-slide>
+      <ion-col class="swiper-zoom-container" style="height:100%;" size="12">
+       
+        <img  *ngIf="c.image && one" src="{{ api.baseUrl + c.image }}" style="height: 200px;" alt="" /> 
+        <img *ngIf="c.image1 && Two" CssClass="vimage"  src="{{ api.baseUrl + c.image1 }}" style="height: 200px;" alt="" />
+        <img *ngIf="c.image2 && Three" CssClass="vimage"  src="{{ api.baseUrl + c.image2 }}" style="height: 200px;" alt="" />
+        <!-- <img *ngIf="!c.image1 && Two" src="{{this.api.noImagePath}}" style="height: 100px;" alt="" /> -->
+        <!-- style="width: 30px;height: 90px;" -->
+       <img  *ngIf="changeText" src="../../../../assets/images/1.jpg" CssClass="vimage" style="height: 120px;" alt="" />
+       
+      </ion-col>
+         </ion-slide>
+    </ion-slides>
+      <ion-col size="12">
+        <ion-label color="secondary">
+          <h3>Price : {{c.price}} BD. Color :{{c.color}}</h3>
+      </ion-label>
+          </ion-col>
+
+      <ion-col size="3">
+        <ion-item button (click)="changeimageOne()">  
+        <!-- <img alt="logo" CssClass="vimage" onmouseover="img(this)" id="xa" height="35" width="30"  [src]="c.image"/> -->
+        <img *ngIf="c.image" CssClass="vimage"  src="{{ api.baseUrl + c.image }}" style="width: 30px;height: 35px;" alt="" />
+        <img *ngIf="!c.image" src="{{this.api.noImagePath}}" style="width: 30px;height: 35px;" alt="" />
+      </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item button (click)="changeimageTwo()">  
+        <!-- <img alt="logo" CssClass="vimage"  height="35" width="30" [src]="c.image1"/> -->
+         <img *ngIf="c.image1" CssClass="vimage"  src="{{ api.baseUrl + c.image1 }}" style="width: 30px;height: 35px;" alt="" />
+         <img *ngIf="!c.image1" src="{{this.api.noImagePath}}" style="width: 30px;height: 35px;" alt="" />
+        <!-- <img  src="../../../../assets/images/1.jpg" CssClass="vimage" (mouseover)="changeText=true" style="width: 30px;height: 35px;" alt="" /> -->
+
+                  
+             <!-- <img  src="../../../../assets/images/1.jpg" CssClass="vimage"  style="width: 45px;height: 35px;" alt="" />                   -->
+        </ion-item>
+       
+      </ion-col>
+      <ion-col size="3">
+        <ion-item button (click)="changeimageThree()"> 
+        <!-- <img alt="logo" CssClass="vimage" onmouseover="img(this)" id="xc" height="35" width="30" [src]="c.image2"/> -->
+        <img *ngIf="c.image2" CssClass="vimage"  src="{{ api.baseUrl + c.image2 }}" style="width: 30px;height: 35px;" alt="" />
+        <img *ngIf="!c.image2" src="{{this.api.noImagePath}}" style="width: 30px;height: 35px;" alt="" />
+      </ion-item>
+      </ion-col>
+      <!-- <ion-col size="12">
+    Price : {{c.price}} BD
+      </ion-col> -->
+
+      <ion-col size="12">
+        <ion-label>
+          <h4>Item Name : {{c.iname}}  </h4>
+        </ion-label>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label color="warning">
+            <h3>Stok Qty : {{c.aquantity}} {{c.ListItem}}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size="12">
+        <ion-label color="secondary">
+          <p>Discripation : {{c.descripation}}</p>
+         </ion-label>
+      </ion-col>
+
+
+      <ion-col size="5">
+        <input type="number" (keydown)="api.numberOnly($event)"  name='Qty' ngModel class="form-control form-control-sm" required #Qty="ngModel"
+        (keyup)="checkaddQTy($event)"
+        [class.is-invalid]="Qty.invalid && Qty.touched" id="Qty" placeholder="Enter Your Qty" [(ngModel)]=prod.quntity>         
+        <!--  (ngModelChange)="checkaddQTy($event)" (keyup)="checkaddQTy($event)" (change)="checkQTY($event)" (keyup)="checkprice($event)" (keydown)="api.numberOnly($event)" -->
+
+      </ion-col>
+      <ion-col size="4">
+      <ion-label>
+        <h3>Size : {{c.size}}</h3>
+      </ion-label>
+        <!-- <input type="text" name='size' ngModel class="form-control form-control-sm" id="size" [(ngModel)]=prod.productSize placeholder="Enter Your size"><br/>    -->
+      </ion-col>
+
+      <ion-col size="3" class="ion-text-right">
+
+        <!-- <span class="text-center"><button type="submit" [disabled]="userForm.form.invalid || companyError" (click)="ChackLogin()"  class="btn btn-primary btn-sm">Login</button></span>  -->
+     
+        <ion-button fill="outline" *ngIf="stokqty" [disabled]="userForm.form.invalid" size="small" (click)="InsettOrder()">Buy          
+        </ion-button>
+      </ion-col>
+      <small class="text-danger" [class.d-none]="Qty.valid || Qty.untouched">Enter Your Qty is required !</small>
+    </ion-row>
+
+  </ion-col>
+</ion-row>
+
+        <!-- <ion-row>
+          <ion-col sizeLg="12" sizeMd="12" sizeXs="12" *ngFor="let c of myObje" class="line">
+
+            <ion-row>
+
+              <ion-col size="12">
+                <img alt="logo" id="xx" height="110"  [src]="c.cars"/>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-label>
+                  <h4>Item Name :{{c.name}}  ||  Price :{{c.price}} BD</h4>
+                </ion-label>
+                <ion-label color="secondary">
+                 <p>Discretion:{{c.discretion}}</p>
+                </ion-label>
+                <ion-label color="red">
+                    <h3>Available Qty :{{c.balanceqty}}</h3>
+                </ion-label>
+              </ion-col>
+
+              <ion-col size="6">
+                <input type="text" name='Qty' ngModel class="form-control" id="Qty" placeholder="Enter Your Qty"><br />
+           
+              </ion-col>
+
+              <ion-col size="6" class="ion-text-right">
+                <ion-button fill="outline" size="small" click="addtoCart(c)">
+                  <ion-icon nane="heart" class="heart"></ion-icon>
+                </ion-button>
+              </ion-col>
+
+            </ion-row>
+
+          </ion-col>
+        </ion-row> -->
+      </ion-grid>
+
+    </div>
+  </form>
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+<!-- <script type="text/javascript">
+  function img(i)
+{
+
+var imgg=document.getElementById('xx');
+console.log('newton'+imgg)
+imgg.src=i.src;
+
+}
+</script> -->

@@ -1,0 +1,89 @@
+
+<ion-header  [translucent]="true">
+  <ion-toolbar  color="secondary">
+    <ion-title class="logo">
+      <img alt="logo" id="header_logo" height="40" float-left src="../../../../assets/icon/favicon.png">{{this.api.companyName}}
+  </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="this.api.Resetpassword()" routerLink="/adlogin">L-Out</ion-button>     
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-header> 
+
+<ion-content>
+
+  <form #userForm="ngForm">
+
+    <!-- {{userForm.value | json}} -->
+    <div class="card">
+      <div class="card-header">
+        <ion-buttons slot="start">
+          <ion-button routerLink="/admin" ><ion-icon name="arrow-back"></ion-icon></ion-button>Item Details
+        </ion-buttons>        
+      </div>
+      </div>
+      <div class="card-body">
+
+
+   
+    <ion-grid> 
+      <ion-row>
+        <ion-col sizeLg="2" sizeMd="2" sizeXs="2" >
+          <span>Item </span>
+        </ion-col>
+        &nbsp;         
+        <ion-col sizeLg="7" sizeMd="7" sizeXs="7" >
+          <input type="text" class="form-control form-control-sm"   placeholder="Search item Name" name="item" [(ngModel)]="searchcom" (ngModelChange)="SearchItem()">  
+  
+        </ion-col>            
+        <ion-col sizeLg="2" sizeMd="2" sizeXs="2" >
+          <button  (click)="ResetItem()" type="submit" class="btn btn-primary btn-xs fon">Reset</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+   
+    
+   
+
+    <div id="no-more-tables">
+    <!-- <table class="table table-success table-striped"> -->
+      <table class="col-md-12 table-bordered table-striped table-condensed cf fonts">
+      <thead>
+      <tr >           
+        <th>S.No</th>
+        <th>Action</th>
+        <th>Item Name</th>           
+        <th>Qty</th>
+        <th>Price</th>             
+        <!--<th>Date</th>-->
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let it of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i = index">
+          <td>{{i+1+(page-1) * pageSize}} </td>
+       <td> <ion-icon name="trash-outline"></ion-icon>||<ion-icon name="create-outline" fill="outline" [routerLink]="['/addquantity/',it?.iid,it.QtID]" routerDirection="forward" ></ion-icon>
+        <!-- {{com.companyid }} -->
+      </td>
+       <td>{{it.iname }}</td>
+       <td>{{it.quantity }}</td>
+       <td>{{it.price }}</td>
+        </tr>
+      </tbody>
+      </table>
+      <ngb-pagination [collectionSize]="items.length" [(page)]="page"  [pageSize]="pageSize" [maxSize]="50" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination> 
+
+    </div>
+  </div>
+
+
+<!-- </div> -->
+    </form>
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="foterhight" color="warning">
+    <ion-title>
+      Do Shopping joyfully....
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+
